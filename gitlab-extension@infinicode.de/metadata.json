@@ -1,0 +1,12 @@
+{
+  "description": "Gitlab extension utilizes the official Gitlab API to provide a comfortable overview about your projects, commits & pipelines.\n",
+  "localedir": "/usr/local/share/locale",
+  "name": "Gitlab Extension",
+  "shell-version": [
+    "3.32",
+    "3.36"
+  ],
+  "url": "https://github.com/cinatic/gitlab-extension",
+  "uuid": "gitlab-extension@infinicode.de",
+  "version": 1
+}

@@ -1,0 +1,51 @@
+.search-bar {
+    padding: 5px 10px;
+}
+
+.search-bar .search-area-box .search-text-input {
+    min-width: 300px;
+}
+
+.search-bar .search-area-box .navigate-back-icon-button {
+    margin-right: 15px;
+}
+
+.search-bar .search-area-box .search-text-input .search-entry-icon {
+    width: 21px;
+    height: 21px;
+}
+
+.search-bar .button-box {
+    height: 20px;
+    margin-left: 15px;
+}
+
+.search-bar .button-box .icon-button {
+    margin: 0 5px;
+}
+
+.card {
+    margin: 10px 15px;
+    padding: 10px 20px;
+    box-shadow: none;
+}
+
+.card .header-box {
+    margin-bottom: 8px;
+}
+
+.card .pipeline-status-icon {
+    margin-left: 8px;
+}
+
+.commit-card .commit-title-label,
+.project-card .project-name-label {
+    font-size: 13pt;
+    padding-right: 10px;
+}
+
+/* i found no other way to highlight the buttons w/o breaking theme... */
+.detail-tab-bar-box .button.active {
+    border-bottom-width: 5px;
+    border-top-width: 5px;
+}
