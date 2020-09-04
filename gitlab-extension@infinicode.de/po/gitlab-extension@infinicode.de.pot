@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-shell-extension-gitlab-extension package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-gitlab-extension\n"
+"Report-Msgid-Bugs-To: fh@infinicode.de\n"
+"POT-Creation-Date: 2020-09-02 20:12+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:11
+msgid "back"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:12
+msgid "Commits"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:13
+msgid "Filter Results"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:14
+#, javascript-format
+msgid "Updated %s ago"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:15
+msgid "Loading Data"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:16
+msgid "Error loading data"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:17
+#, javascript-format
+msgid "Error Loading %s: %s"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:18
+msgid "Pipelines"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:19
+msgid "Can not fetch data without token. Please open settings and add a token."
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:43
+msgid "The date format is used when creating taks and showing dates"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:46
+msgid "Gitlab Token"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:57
+msgid "The gitlab token is mandatory, you can create it in your preferences"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:64
+msgid "Enter Gitlab Token here"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:78
+msgid "Gitlab"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:99
+msgid "Position in Panel"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:112
+msgid "Center"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:113
+msgid "Right"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:114
+msgid "Left"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:131
+msgid "Layout"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:170
+msgid "Version: "
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:184
+msgid "unknown (self-build ?)"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:204
+msgid ""
+"<span>Gitlab will provide you a couple of information about your projects "
+"and pipelines. It utilizes the official <a href=\"https://docs.gitlab.com/ee/"
+"api/\">Gitlab API v4</a>. The plan is to have a quick and convenient control "
+"over the latest builds & commits.</span>"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:227
+msgid "Maintained by"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:278
+msgid ""
+"<span size=\"small\">This program comes with ABSOLUTELY NO WARRANTY.\n"
+"See the <a href=\"https://www.gnu.org/licenses/gpl\">GNU General Public "
+"License, version 3 or later</a> for details.</span>"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings.ui:299
+msgid "About"
+msgstr ""

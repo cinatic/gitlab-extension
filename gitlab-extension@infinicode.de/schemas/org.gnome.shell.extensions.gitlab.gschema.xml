@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extension-gitlab">
+  <enum id="org.gnome.shell.extensions.gitlab.position">
+    <value value="0" nick="center"/>
+    <value value="1" nick="right"/>
+    <value value="2" nick="left"/>
+  </enum>
+  <schema path="/org/gnome/shell/extensions/gitlab/" id="org.gnome.shell.extensions.gitlab">
+    <key name="position-in-panel" enum="org.gnome.shell.extensions.gitlab.position">
+      <default>'center'</default>
+      <summary>Position in Panel</summary>
+    </key>
+    <key name="gitlab-token" type="s">
+      <default>''</default>
+      <summary>Gitlab API Token</summary>
+    </key>
+  </schema>
+</schemalist>
