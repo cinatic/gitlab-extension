@@ -4,7 +4,8 @@
   "name": "Gitlab Extension",
   "shell-version": [
     "3.32",
-    "3.36"
+    "3.36",
+    "3.38"
   ],
   "url": "https://github.com/cinatic/gitlab-extension",
   "uuid": "gitlab-extension@infinicode.de",

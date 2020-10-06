@@ -90,7 +90,7 @@ var GitlabPanelMenuButton = GObject.registerClass(
           return
         }
 
-        this.actor.get_parent().remove_actor(this.actor)
+        this.get_parent().remove_actor(this.actor)
 
         switch (this._currentPanelPosition) {
           case MenuPosition.LEFT:
