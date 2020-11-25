@@ -55,26 +55,25 @@ var GitlabPanelMenuButton = GObject.registerClass(
           style_class: 'system-status-icon'
         })
 
-        let box = new St.BoxLayout({ style_class: 'clock-display-box' })
-        box.add_actor(panelMenuIcon)
+        const gitlabPanelIconBin = new St.Bin({
+          style_class: 'gitlab-panel-bin',
+          child: panelMenuIcon
+        })
 
-        this.add_actor(box)
-        this.add_style_class_name('gitlab-extension-panel-button')
+        this.add_actor(gitlabPanelIconBin)
+        this.add_style_class_name('gitlab-extension')
 
-        let bin = new St.Widget()
+        let bin = new St.Widget({ style_class: 'gitlab-extension' })
         // For some minimal compatibility with PopupMenuItem
         bin._delegate = this
         this.menu.box.add_child(bin)
 
-        const mainContentBox = new St.BoxLayout({ name: 'gitlab-extension-main-box' })
-        bin.add_actor(mainContentBox)
+        this._screenWrapper = new ScreenWrapper()
+        bin.add_actor(this._screenWrapper)
 
         Settings.connect('changed', () => this._sync())
 
         this._sync()
-
-        this._messageList = new ScreenWrapper()
-        mainContentBox.add_child(this._messageList)
 
         EventHandler.connect('hide-panel', () => this.menu.close())
       }
