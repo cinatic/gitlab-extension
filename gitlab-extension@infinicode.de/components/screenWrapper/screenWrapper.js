@@ -10,10 +10,7 @@ var ScreenWrapper = GObject.registerClass(
     class ScreenWrapper extends St.Widget {
       _init () {
         super._init({
-          style_class: 'screen-wrapper',
-          layout_manager: new Clutter.BinLayout(),
-          x_expand: true,
-          y_expand: true
+          style_class: 'screen-wrapper'
         })
 
         EventHandler.connect('show-screen', (sender, { screen, additionalData }) => this.showScreen(screen, additionalData))
@@ -22,8 +19,6 @@ var ScreenWrapper = GObject.registerClass(
       }
 
       showScreen (screenName, additionalData) {
-        screenName = screenName || 'projects'
-
         let screen
 
         switch (screenName) {

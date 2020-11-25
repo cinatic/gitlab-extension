@@ -20,10 +20,8 @@ const TABS = {
 var ProjectDetailsScreen = GObject.registerClass({}, class ProjectDetailsScreen extends St.BoxLayout {
   _init (projectItem) {
     super._init({
-      style_class: 'projects-screen',
-      vertical: true,
-      x_expand: true,
-      y_expand: true
+      style_class: 'screen project-details-screen',
+      vertical: true
     })
 
     this._selectedTab = TABS.COMMITS

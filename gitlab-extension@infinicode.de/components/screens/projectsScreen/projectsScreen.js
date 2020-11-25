@@ -15,10 +15,8 @@ const GitlabService = Me.imports.services.gitlab
 var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.BoxLayout {
   _init () {
     super._init({
-      style_class: 'projects-screen',
-      vertical: true,
-      x_expand: true,
-      y_expand: true
+      style_class: 'screen projects-screen',
+      vertical: true
     })
 
     const searchBar = new SearchBar()

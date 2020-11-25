@@ -20,8 +20,7 @@ var SearchBar = GObject.registerClass({
   _init ({ back_screen_name } = {}) {
     super._init({
       style_class: 'search-bar',
-      x_expand: true,
-      y_expand: true
+      x_expand: true
     })
 
     this.back_screen_name = back_screen_name
@@ -38,8 +37,7 @@ var SearchBar = GObject.registerClass({
   _createSearchArea () {
     let searchInputBox = new St.BoxLayout({
       style_class: 'search-area-box',
-      x_expand: true,
-      y_expand: false
+      x_expand: true
     })
 
     if (this.back_screen_name) {
@@ -71,7 +69,6 @@ var SearchBar = GObject.registerClass({
     const inputBoxBin = new St.Bin({
       style_class: 'search-text-input-bin',
       x_expand: true,
-      y_expand: true,
       child: inputBox
     })
 
@@ -83,8 +80,6 @@ var SearchBar = GObject.registerClass({
   _createButtonBox () {
     let buttonBox = new St.BoxLayout({
       style_class: 'button-box',
-      x_expand: false,
-      y_expand: false,
       x_align: St.Align.END
     })
 
