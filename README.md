@@ -1,5 +1,5 @@
 # gitlab-extension
-Gitlab extension utilizes the official Gitlab API to provide a comfortable overview about your projects, 
+GitLab extension utilizes the official GitLab API to provide a comfortable overview about your projects, 
 commits & pipelines.
 
 <img alt="projects" src="https://github.com/cinatic/gitlab-extension/raw/master/images/projects.png" width="350">
@@ -12,7 +12,7 @@ Either install it:
 - download a release: https://github.com/cinatic/gitlab-extension/releases
 
 ## Data Source
-The data is fetched from the official Gitlab API https://docs.gitlab.com/ee/api/. 
+The data is fetched from the official GitLab API https://docs.gitlab.com/ee/api/. 
 The API has some *limitions*, e.g. it only returns domain specific data. 
 As an example `projects` and `commits` for example do not have any information of the pipeline status or you
 can only fetch `pipelines` for a single project. So in this extension we mash up some data and can show only 

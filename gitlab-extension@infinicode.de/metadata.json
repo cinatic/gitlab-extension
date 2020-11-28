@@ -1,7 +1,7 @@
 {
-  "description": "Gitlab extension utilizes the official Gitlab API to provide a comfortable overview about your projects, commits & pipelines.\n",
+  "description": "GitLab extension utilizes the official GitLab API to provide a comfortable overview about your projects, commits & pipelines.\n",
   "localedir": "/usr/local/share/locale",
-  "name": "Gitlab Extension",
+  "name": "GitLab Extension",
   "shell-version": [
     "3.32",
     "3.36",
