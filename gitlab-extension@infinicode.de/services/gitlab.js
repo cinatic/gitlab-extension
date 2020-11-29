@@ -1,6 +1,7 @@
 const ExtensionUtils = imports.misc.extensionUtils
 const Me = ExtensionUtils.getCurrentExtension()
 
+const { cacheOrDefault } = Me.imports.helpers.data
 const { fetch } = Me.imports.helpers.fetch
 const { Settings } = Me.imports.helpers.settings
 
@@ -9,19 +10,19 @@ const headers = token => ({
 })
 
 var getOwnedProjects = async ({ per_page }) => {
-  const { apiEndpoint, token } = Settings.selected_gitlab_account || {}
+  const { name: accountName, apiEndpoint, token } = Settings.selected_gitlab_account || {}
 
-  log(`request: ${apiEndpoint} ${token}`)
+  return cacheOrDefault(`projects_${apiEndpoint}_${accountName}`, () => {
+    const queryParameters = {
+      owned: 1,
+      order_by: 'last_activity_at',
+      per_page
+    }
 
-  const queryParameters = {
-    owned: 1,
-    order_by: 'last_activity_at',
-    per_page
-  }
+    const url = `${apiEndpoint}/projects`
 
-  const url = `${apiEndpoint}/projects`
-
-  return fetch({ url, headers: headers(token), queryParameters })
+    return fetch({ url, headers: headers(token), queryParameters })
+  })
 }
 
 var getCommits = async ({ projectId, per_page }) => {

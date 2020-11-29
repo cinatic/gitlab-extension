@@ -3,8 +3,10 @@ const { GObject, St } = imports.gi
 const ExtensionUtils = imports.misc.extensionUtils
 const Me = ExtensionUtils.getCurrentExtension()
 
+const { clearCache } = Me.imports.helpers.data
 const { EventHandler } = Me.imports.helpers.eventHandler
 const { FlatList } = Me.imports.components.flatList.flatList
+const { ProjectSelectButtons } = Me.imports.components.gitlab.projectSelectButtons
 const { ProjectCard } = Me.imports.components.cards.projectCard
 const { SearchBar } = Me.imports.components.searchBar.searchBar
 const { Settings } = Me.imports.helpers.settings
@@ -23,10 +25,27 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
     this._list = new FlatList()
 
     this.add_child(searchBar)
+
+    this._projectSelectButtons = new ProjectSelectButtons()
+    this._projectSelectButtons.visible = Settings.gitlab_accounts.length > 1
+    this.add_child(this._projectSelectButtons)
+
     this.add_child(this._list)
 
-    searchBar.connect('refresh', () => this._loadData())
+    searchBar.connect('refresh', () => {
+      clearCache()
+      this._loadData()
+    })
+
     searchBar.connect('text-change', (sender, searchText) => this._filter_results(searchText))
+
+    Settings.connect('changed', (value, key) => {
+      if (key === 'gitlab-accounts' || key === 'selected-gitlab-account-index') {
+        this._loadData()
+      }
+
+      this._projectSelectButtons.visible = Settings.gitlab_accounts.length > 1
+    })
 
     this._list.connect('clicked-item', (sender, item) => EventHandler.emit('show-screen', {
       screen: 'project-details',

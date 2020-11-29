@@ -70,8 +70,7 @@ const Handler = class {
   }
 
   get selected_gitlab_account () {
-    const selectedIndex = this._settings.get_int(SELECTED_GITLAB_ACCOUNT_INDEX) || 0
-
+    const selectedIndex = this.selected_gitlab_account_index
     const accounts = this.gitlab_accounts
 
     if (!isNullOrEmpty(accounts)) {
@@ -79,7 +78,11 @@ const Handler = class {
     }
   }
 
-  set selected_account_index (v) {
+  get selected_gitlab_account_index () {
+    return this._settings.get_int(SELECTED_GITLAB_ACCOUNT_INDEX) || 0
+  }
+
+  set selected_gitlab_account_index (v) {
     return this._settings.set_int(SELECTED_GITLAB_ACCOUNT_INDEX, v)
   }
 

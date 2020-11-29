@@ -49,6 +49,24 @@
     padding-right: 10px;
 }
 
+.gitlab-extension .project-select-buttons {
+    height: 40px;
+    min-height: 40px;
+    padding: 5px;
+}
+
+.gitlab-extension .project-select-buttons .message.button {
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 5px !important;
+    margin: 5px !important;
+}
+
+.gitlab-extension .project-select-buttons .message.button.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 /* i found no other way to highlight the buttons w/o breaking theme... */
 .gitlab-extension .detail-tab-bar-box .button.active {
     border-bottom-width: 5px;
