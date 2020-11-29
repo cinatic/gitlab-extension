@@ -16,18 +16,20 @@ SCHEMAS_DIR := $(SRC_DIR)/schemas
 PO_DIR := $(SRC_DIR)/po
 LOCALE_DIR := $(SRC_DIR)/locale
 
-JS_FILES := $(wildcard $(SRC_DIR)/helpers/translations.js)
+JS_FILES := $(wildcard $(SRC_DIR)/*.js)
 UI_FILES := $(wildcard $(SRC_DIR)/*.ui)
+JS_COMPONENTS := $(SRC_DIR)/components $(SRC_DIR)/helpers $(SRC_DIR)/services
 
 FILES := $(SRC_DIR)/* README.md
 COMPILED_SCHEMAS := $(SCHEMAS_DIR)/gschemas.compiled
 
+POT_FILE := $(PO_DIR)/$(UUID).pot
 PO_FILES := $(wildcard $(PO_DIR)/*.po)
 MO_FILES := $(PO_FILES:$(PO_DIR)/%.po=$(LOCALE_DIR)/%/LC_MESSAGES/$(UUID).mo)
 MO_DIR := $(PO_FILES:$(PO_DIR)/%.po=$(LOCALE_DIR)/%/LC_MESSAGES)
 
-POT_FILE := $(PO_DIR)/$(UUID).pot
-TOLOCALIZE := $(JS_FILES:$(SRC_DIR)/%.js=%.js) $(UI_FILES:$(SRC_DIR)/%.ui=%.ui)
+TOLOCALIZE := $(JS_FILES) $(UI_FILES) $(SRC_DIR)/helpers/translations.js
+FILES :=  $(JS_FILES) $(JS_COMPONENTS) $(COMPILED_SCHEMAS) $(UI_FILES) $(CSS_FILES) $(SRC_DIR)/metadata.json $(MO_FILES)
 
 ifeq ($(strip $(DESTDIR)),)
 	INSTALLBASE := $(HOME)/.local
@@ -52,20 +54,20 @@ $(LOCALE_DIR)/%/LC_MESSAGES:
 $(PO_DIR):
 	mkdir -p $@
 
-$(PO_DIR)/%.po: $(POT_FILE) $(PO_DIR)
+$(POT_FILE): $(PO_DIR) $(MO_DIR)
+	xgettext --from-code=UTF-8 --package-name "gnome-shell-extension-$(EXTENSION_NAME)" --msgid-bugs-address=$(AUTHOR_MAIL) -k_ -kN_ -o $(POT_FILE) $(TOLOCALIZE)
+
+$(PO_FILES): $(POT_FILE) $(PO_DIR)
 	msgmerge -m -U --backup=none $@ $<
 
-$(LOCALE_DIR)/%/LC_MESSAGES/$(UUID).mo: $(PO_DIR)/%.po $(MO_DIR)
+$(MO_FILES): $(PO_FILES) $(MO_DIR)
 	msgfmt -c $< -o $@
 
-$(POT_FILE): $(PO_DIR) $(JS_FILES) $(UI_FILES)
-	xgettext --from-code=UTF-8 --package-name "gnome-shell-extension-$(EXTENSION_NAME)" --msgid-bugs-address=$(AUTHOR_MAIL) -k_ -kN_ -o $(PO_DIR)/$(UUID).pot $(JS_FILES) $(UI_FILES)
-
-build: $(BUILD_DIR) $(COMPILED_SCHEMAS) $(POT_FILE) $(MO_FILES)
-	cp -r $(FILES) $<
+build: $(BUILD_DIR) $(COMPILED_SCHEMAS) $(MO_FILES)
+	cp -r --parents $(FILES) $<
 
 package: $(BUILD_DIR)
-	cd $(BUILD_DIR) && zip -r $(EXTENSION_NAME).zip *
+	cd $(BUILD_DIR)/${SRC_DIR} && zip -r ../$(EXTENSION_NAME).zip *
 
 install: build
 	rm -rf $(INSTALL_DIR)
@@ -73,8 +75,7 @@ install: build
 	cp -r $(BUILD_DIR)/* $(INSTALL_DIR)
 
 clean:
-	rm -f $(COMPILED_SCHEMAS) $(POT_FILE)
-	rm -rf $(LOCALE_DIR)
+	rm -f $(COMPILED_SCHEMAS) $(MO_FILES)
 
 mrproper: clean
 	rm -rf $(BUILD_DIR)
