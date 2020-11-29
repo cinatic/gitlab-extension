@@ -1,7 +1,7 @@
 /* jshint esnext:true */
 /*
  *
- * GNOME Shell Extension for the beautiful Gitlab Portal
+ * GNOME Shell Extension for the beautiful GitLab Portal
  *
  * Copyright (C) 2020 * Florijan Hamzic <florijanh@gmail.com> *
  *
@@ -43,8 +43,8 @@ const MenuPosition = {
   LEFT: 2
 }
 
-var GitlabPanelMenuButton = GObject.registerClass(
-    class GitlabMenuButton extends PanelMenu.Button {
+var GitLabPanelMenuButton = GObject.registerClass(
+    class GitLabMenuButton extends PanelMenu.Button {
       _init () {
         super._init(0.5)
 
@@ -139,7 +139,7 @@ function init (extensionMeta) {
 }
 
 function enable () {
-  gitlabPanelMenuButton = new GitlabPanelMenuButton()
+  gitlabPanelMenuButton = new GitLabPanelMenuButton()
   Main.panel.addToStatusArea('gitlabMenu', gitlabPanelMenuButton)
 }
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-gitlab-extension\n"
 "Report-Msgid-Bugs-To: fh@infinicode.de\n"
-"POT-Creation-Date: 2020-11-29 15:21+0100\n"
+"POT-Creation-Date: 2020-11-29 16:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: gitlab-extension@infinicode.de/settings.ui:7
-msgid "Create Gitlab Account"
+msgid "Create GitLab Account"
 msgstr ""
 
 #: gitlab-extension@infinicode.de/settings.ui:28
@@ -67,7 +67,7 @@ msgid "Save"
 msgstr ""
 
 #: gitlab-extension@infinicode.de/settings.ui:171
-msgid "Edit Gitlab Account"
+msgid "Edit GitLab Account"
 msgstr ""
 
 #: gitlab-extension@infinicode.de/settings.ui:192
@@ -116,9 +116,9 @@ msgstr ""
 
 #: gitlab-extension@infinicode.de/settings.ui:604
 msgid ""
-"<span>Gitlab will provide you a couple of information about your projects "
+"<span>GitLab will provide you a couple of information about your projects "
 "and pipelines. It utilizes the official <a href=\"https://docs.gitlab.com/ee/"
-"api/\">Gitlab API v4</a>. The plan is to have a quick and convenient control "
+"api/\">GitLab API v4</a>. The plan is to have a quick and convenient control "
 "over the latest builds and commits.</span>"
 msgstr ""
 

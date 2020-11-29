@@ -4,7 +4,7 @@
   <requires lib="gtk+" version="3.8"/>
   <object class="GtkWindow" id="create-gitlab-account-widget">
     <property name="can-focus">False</property>
-    <property name="title" translatable="yes">Create Gitlab Account</property>
+    <property name="title" translatable="yes">Create GitLab Account</property>
     <property name="modal">True</property>
     <property name="window-position">center-on-parent</property>
     <property name="destroy-with-parent">True</property>
@@ -168,7 +168,7 @@
   </object>
   <object class="GtkWindow" id="edit-gitlab-account-widget">
     <property name="can-focus">False</property>
-    <property name="title" translatable="yes">Edit Gitlab Account</property>
+    <property name="title" translatable="yes">Edit GitLab Account</property>
     <property name="modal">True</property>
     <property name="window-position">center-on-parent</property>
     <property name="destroy-with-parent">True</property>
@@ -548,7 +548,7 @@
                   <object class="GtkLabel" id="extension-label">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label">&lt;b&gt;Gitlab&lt;/b&gt;</property>
+                    <property name="label">&lt;b&gt;GitLab&lt;/b&gt;</property>
                     <property name="use-markup">True</property>
                   </object>
                   <packing>
@@ -601,7 +601,7 @@
                   <object class="GtkLabel" id="description-label">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">&lt;span&gt;Gitlab will provide you a couple of information about your projects and pipelines. It utilizes the official &lt;a href="https://docs.gitlab.com/ee/api/"&gt;Gitlab API v4&lt;/a&gt;. The plan is to have a quick and convenient control over the latest builds and commits.&lt;/span&gt;</property>
+                    <property name="label" translatable="yes">&lt;span&gt;GitLab will provide you a couple of information about your projects and pipelines. It utilizes the official &lt;a href="https://docs.gitlab.com/ee/api/"&gt;GitLab API v4&lt;/a&gt;. The plan is to have a quick and convenient control over the latest builds and commits.&lt;/span&gt;</property>
                     <property name="use-markup">True</property>
                     <property name="justify">center</property>
                     <property name="wrap">True</property>

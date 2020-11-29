@@ -14,7 +14,7 @@ var getOwnedProjects = async ({ per_page }) => {
 
   return cacheOrDefault(`projects_${apiEndpoint}_${accountName}`, () => {
     const queryParameters = {
-      owned: 1,
+      owned: 0,
       order_by: 'last_activity_at',
       per_page
     }

@@ -13,18 +13,18 @@
 
         <key name="gitlab-accounts" type="s">
             <default>''</default>
-            <summary>Gitlab API Accounts</summary>
+            <summary>GitLab API Accounts</summary>
         </key>
 
         <key name="selected-gitlab-account-index" type="i">
             <default>0</default>
-            <summary>Currently selected Gitlab Account Index</summary>
+            <summary>Currently selected GitLab Account Index</summary>
         </key>
 
         <!-- only for backwards compatibility -->
         <key name="gitlab-token" type="s">
             <default>''</default>
-            <summary>Gitlab API Token</summary>
+            <summary>GitLab API Token</summary>
         </key>
     </schema>
 </schemalist>

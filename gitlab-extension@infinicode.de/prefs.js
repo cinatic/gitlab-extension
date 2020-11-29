@@ -20,7 +20,7 @@ let defaultSize = [-1, -1]
 
 let i = 0
 var PrefsWidget = GObject.registerClass({
-  GTypeName: 'GitlabExtensionPrefsWidget'
+  GTypeName: 'GitLabExtensionPrefsWidget'
 }, class Widget extends Gtk.Box {
 
   _init (params = {}) {
@@ -163,34 +163,34 @@ var PrefsWidget = GObject.registerClass({
     this.treeview = this.Window.get_object('tree-treeview')
     this.liststore = this.Window.get_object('tree-liststore')
 
-    this.createGitlabAccountWidget = this.Window.get_object('create-gitlab-account-widget')
+    this.createGitLabAccountWidget = this.Window.get_object('create-gitlab-account-widget')
     this.newAccountNameInput = this.Window.get_object('create-gitlab-account-name-input')
     this.newAccountTokenInput = this.Window.get_object('create-gitlab-account-token-input')
     this.newAccountApiEndpointInput = this.Window.get_object('create-gitlab-account-api-endpoint-input')
 
-    this.editGitlabAccountWidget = this.Window.get_object('edit-gitlab-account-widget')
+    this.editGitLabAccountWidget = this.Window.get_object('edit-gitlab-account-widget')
     this.editAccountNameInput = this.Window.get_object('edit-gitlab-account-name-input')
     this.editAccountTokenInput = this.Window.get_object('edit-gitlab-account-token-input')
     this.editAccountApiEndpointInput = this.Window.get_object('edit-gitlab-account-api-endpoint-input')
 
     // TreeView / Table Buttons
     this.Window.get_object('tree-toolbutton-add').connect('clicked', () => {
-      this.createGitlabAccountWidget.show_all()
+      this.createGitLabAccountWidget.show_all()
     })
 
-    this.Window.get_object('tree-toolbutton-remove').connect('clicked', this.removeGitlabAccountItem.bind(this))
-    this.Window.get_object('tree-toolbutton-edit').connect('clicked', this.showEditGitlabAccountWidget.bind(this))
+    this.Window.get_object('tree-toolbutton-remove').connect('clicked', this.removeGitLabAccountItem.bind(this))
+    this.Window.get_object('tree-toolbutton-edit').connect('clicked', this.showEditGitLabAccountWidget.bind(this))
 
     // Create Widget Buttons
-    this.Window.get_object('button-create-save').connect('clicked', this.createGitlabAccountItem.bind(this))
+    this.Window.get_object('button-create-save').connect('clicked', this.createGitLabAccountItem.bind(this))
     this.Window.get_object('button-create-cancel').connect('clicked', () => {
-      this.createGitlabAccountWidget.hide()
+      this.createGitLabAccountWidget.hide()
     })
 
     // Edit Widget Buttons
-    this.Window.get_object('button-edit-save').connect('clicked', this.updateGitlabAccountItem.bind(this))
+    this.Window.get_object('button-edit-save').connect('clicked', this.updateGitLabAccountItem.bind(this))
     this.Window.get_object('button-edit-cancel').connect('clicked', () => {
-      this.editGitlabAccountWidget.hide()
+      this.editGitLabAccountWidget.hide()
     })
 
     this._initTreeViewColumns()
@@ -265,7 +265,7 @@ var PrefsWidget = GObject.registerClass({
   /**
    * show edit tree item widget
    */
-  showEditGitlabAccountWidget () {
+  showEditGitLabAccountWidget () {
     const selection = this.treeview.get_selection().get_selected_rows()
 
     // check if a row has been selected
@@ -285,13 +285,13 @@ var PrefsWidget = GObject.registerClass({
     this.editAccountTokenInput.set_text(selectedItem.token)
     this.editAccountApiEndpointInput.set_text(selectedItem.apiEndpoint)
 
-    this.editGitlabAccountWidget.show_all()
+    this.editGitLabAccountWidget.show_all()
   }
 
   /**
    * Save new tree item data
    */
-  createGitlabAccountItem () {
+  createGitLabAccountItem () {
     const name = this.newAccountNameInput.get_text().trim()
     const token = this.newAccountTokenInput.get_text().trim()
     const apiEndpoint = this.newAccountApiEndpointInput.get_text().trim()
@@ -305,13 +305,13 @@ var PrefsWidget = GObject.registerClass({
     // append new item and write it to config
     this.gitlabAccounts = [...this.gitlabAccounts, newItem]
 
-    this.createGitlabAccountWidget.hide()
+    this.createGitLabAccountWidget.hide()
   }
 
   /**
    * update tree item data
    */
-  updateGitlabAccountItem () {
+  updateGitLabAccountItem () {
     const selection = this.treeview.get_selection().get_selected_rows()
 
     // check if a row has been selected
@@ -340,13 +340,13 @@ var PrefsWidget = GObject.registerClass({
     gitlabAccounts[selectionIndex] = newItem
     this.gitlabAccounts = gitlabAccounts
 
-    this.editGitlabAccountWidget.hide()
+    this.editGitLabAccountWidget.hide()
   }
 
   /**
    * Remove tree item
    */
-  removeGitlabAccountItem () {
+  removeGitLabAccountItem () {
     const selection = this.treeview.get_selection().get_selected_rows()
 
     // check if a row has been selected

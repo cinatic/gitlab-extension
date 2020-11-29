@@ -19,8 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: gitlab-extension@infinicode.de/settings.ui:7
-msgid "Create Gitlab Account"
-msgstr "Gitlab Account erstellen"
+msgid "Create GitLab Account"
+msgstr "GitLab Account erstellen"
 
 #: gitlab-extension@infinicode.de/settings.ui:28
 #: gitlab-extension@infinicode.de/helpers/translations.js:22
@@ -68,7 +68,7 @@ msgid "Save"
 msgstr "Speichern"
 
 #: gitlab-extension@infinicode.de/settings.ui:171
-msgid "Edit Gitlab Account"
+msgid "Edit GitLab Account"
 msgstr "Account bearbeiten"
 
 #: gitlab-extension@infinicode.de/settings.ui:192
@@ -117,9 +117,9 @@ msgstr ""
 
 #: gitlab-extension@infinicode.de/settings.ui:604
 msgid ""
-"<span>Gitlab will provide you a couple of information about your projects "
+"<span>GitLab will provide you a couple of information about your projects "
 "and pipelines. It utilizes the official <a href=\"https://docs.gitlab.com/ee/"
-"api/\">Gitlab API v4</a>. The plan is to have a quick and convenient control "
+"api/\">GitLab API v4</a>. The plan is to have a quick and convenient control "
 "over the latest builds and commits.</span>"
 msgstr ""
 

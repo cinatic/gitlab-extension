@@ -12,7 +12,7 @@ const { SearchBar } = Me.imports.components.searchBar.searchBar
 const { Settings } = Me.imports.helpers.settings
 const { Translations } = Me.imports.helpers.translations
 
-const GitlabService = Me.imports.services.gitlab
+const GitLabService = Me.imports.services.gitlab
 
 var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.BoxLayout {
   _init () {
@@ -82,7 +82,7 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
 
     this._list.show_loading_info()
 
-    const response = await GitlabService.getOwnedProjects({ per_page: 50 })
+    const response = await GitLabService.getOwnedProjects({ per_page: 50 })
 
     if (!response.ok) {
       this._list.show_error_info(Translations.LOADING_DATA_ERROR_SPECIFIC.format('projects', `${response.statusText} - ${response.text()}`))
@@ -93,7 +93,7 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
 
     // load extra data for the first 6 projects
     // CAREFUL: gitlab has a limit of 10 req /s
-    const top6ProjectPipelines = await Promise.all(projects.slice(0, 6).map(project => GitlabService.getPipelines({ projectId: project.id, per_page: 1 })))
+    const top6ProjectPipelines = await Promise.all(projects.slice(0, 6).map(project => GitLabService.getPipelines({ projectId: project.id, per_page: 1 })))
 
     this._list.clear_list_items()
 

@@ -10,7 +10,7 @@ const { ProjectCard } = Me.imports.components.cards.projectCard
 const { SearchBar } = Me.imports.components.searchBar.searchBar
 const { Translations } = Me.imports.helpers.translations
 
-const GitlabService = Me.imports.services.gitlab
+const GitLabService = Me.imports.services.gitlab
 
 const TABS = {
   COMMITS: 'commits',
@@ -143,8 +143,8 @@ var ProjectDetailsScreen = GObject.registerClass({}, class ProjectDetailsScreen 
     this._list.show_loading_info()
 
     const [commitsResponse, pipelineResponse] = await Promise.all([
-      GitlabService.getCommits({ projectId: this.projectItem.id, per_page: 50 }),
-      GitlabService.getPipelines({ projectId: this.projectItem.id, per_page: 100 })
+      GitLabService.getCommits({ projectId: this.projectItem.id, per_page: 50 }),
+      GitLabService.getPipelines({ projectId: this.projectItem.id, per_page: 100 })
     ])
 
     if (!commitsResponse.ok) {
@@ -173,8 +173,8 @@ var ProjectDetailsScreen = GObject.registerClass({}, class ProjectDetailsScreen 
     this._list.show_loading_info()
 
     const [pipelineResponse, commitsResponse] = await Promise.all([
-      GitlabService.getPipelines({ projectId: this.projectItem.id }),
-      GitlabService.getCommits({ projectId: this.projectItem.id, per_page: 50 })
+      GitLabService.getPipelines({ projectId: this.projectItem.id }),
+      GitLabService.getCommits({ projectId: this.projectItem.id, per_page: 50 })
     ])
 
     if (!pipelineResponse.ok) {
