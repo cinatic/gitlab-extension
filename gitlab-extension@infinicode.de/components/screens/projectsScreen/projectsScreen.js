@@ -3,32 +3,49 @@ const { GObject, St } = imports.gi
 const ExtensionUtils = imports.misc.extensionUtils
 const Me = ExtensionUtils.getCurrentExtension()
 
+const { clearCache } = Me.imports.helpers.data
 const { EventHandler } = Me.imports.helpers.eventHandler
 const { FlatList } = Me.imports.components.flatList.flatList
+const { ProjectSelectButtons } = Me.imports.components.gitlab.projectSelectButtons
 const { ProjectCard } = Me.imports.components.cards.projectCard
 const { SearchBar } = Me.imports.components.searchBar.searchBar
 const { Settings } = Me.imports.helpers.settings
 const { Translations } = Me.imports.helpers.translations
 
-const GitlabService = Me.imports.services.gitlab
+const GitLabService = Me.imports.services.gitlab
 
 var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.BoxLayout {
   _init () {
     super._init({
-      style_class: 'projects-screen',
-      vertical: true,
-      x_expand: true,
-      y_expand: true
+      style_class: 'screen projects-screen',
+      vertical: true
     })
 
     const searchBar = new SearchBar()
     this._list = new FlatList()
 
     this.add_child(searchBar)
+
+    this._projectSelectButtons = new ProjectSelectButtons()
+    this._projectSelectButtons.visible = Settings.gitlab_accounts.length > 1
+    this.add_child(this._projectSelectButtons)
+
     this.add_child(this._list)
 
-    searchBar.connect('refresh', () => this._loadData())
+    searchBar.connect('refresh', () => {
+      clearCache()
+      this._loadData()
+    })
+
     searchBar.connect('text-change', (sender, searchText) => this._filter_results(searchText))
+
+    Settings.connect('changed', (value, key) => {
+      if (key === 'gitlab-accounts' || key === 'selected-gitlab-account-index') {
+        this._loadData()
+      }
+
+      this._projectSelectButtons.visible = Settings.gitlab_accounts.length > 1
+    })
 
     this._list.connect('clicked-item', (sender, item) => EventHandler.emit('show-screen', {
       screen: 'project-details',
@@ -58,14 +75,14 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
   }
 
   async _loadData () {
-    if (!Settings.gitlab_token) {
+    if (!Settings.selected_gitlab_account) {
       this._list.show_error_info(Translations.TOKEN_ERROR)
       return
     }
 
     this._list.show_loading_info()
 
-    const response = await GitlabService.getOwnedProjects({ per_page: 50 })
+    const response = await GitLabService.getOwnedProjects({ per_page: 50 })
 
     if (!response.ok) {
       this._list.show_error_info(Translations.LOADING_DATA_ERROR_SPECIFIC.format('projects', `${response.statusText} - ${response.text()}`))
@@ -76,7 +93,7 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
 
     // load extra data for the first 6 projects
     // CAREFUL: gitlab has a limit of 10 req /s
-    const top6ProjectPipelines = await Promise.all(projects.slice(0, 6).map(project => GitlabService.getPipelines({ projectId: project.id, per_page: 1 })))
+    const top6ProjectPipelines = await Promise.all(projects.slice(0, 6).map(project => GitLabService.getPipelines({ projectId: project.id, per_page: 1 })))
 
     this._list.clear_list_items()
 

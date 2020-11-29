@@ -15,7 +15,6 @@ var ProjectCard = GObject.registerClass({}, class ProjectCard extends St.Button 
       style_class: 'card message project-card',
       can_focus: true,
       x_expand: true,
-      y_expand: true,
       hover: true
     })
 
@@ -40,8 +39,7 @@ var ProjectCard = GObject.registerClass({}, class ProjectCard extends St.Button 
   _createHeader () {
     let headerBox = new St.BoxLayout({
       style_class: 'header-box',
-      x_expand: true,
-      y_expand: true
+      x_expand: true
     })
 
     const leftBox = this._createProjectPath()
@@ -57,7 +55,6 @@ var ProjectCard = GObject.registerClass({}, class ProjectCard extends St.Button 
     const projectPathBin = new St.Bin({
       style_class: 'project-path-bin',
       x_expand: true,
-      y_expand: true,
       child: new St.Label({ style_class: 'project-path-label', text: this.cardItem.path_with_namespace.replace(/\//g, ' / ') })
     })
 
@@ -68,7 +65,6 @@ var ProjectCard = GObject.registerClass({}, class ProjectCard extends St.Button 
     let headerInfoSection = new St.BoxLayout({
       style_class: 'info-section-box',
       x_expand: false,
-      y_expand: true,
       x_align: St.Align.END,
       y_align: St.Align.MIDDLE
     })
@@ -97,8 +93,7 @@ var ProjectCard = GObject.registerClass({}, class ProjectCard extends St.Button 
   _createProjectInfo () {
     let projectInfoBox = new St.BoxLayout({
       style_class: 'project-info-box',
-      x_expand: true,
-      y_expand: true
+      x_expand: true
     })
 
     const leftBox = this._createProjectName()
@@ -114,7 +109,6 @@ var ProjectCard = GObject.registerClass({}, class ProjectCard extends St.Button 
     const projectNameBin = new St.Bin({
       style_class: 'project-name-bin',
       x_expand: true,
-      y_expand: true,
       child: new St.Label({ style_class: 'project-name-label', text: this.cardItem.name })
     })
 
@@ -125,7 +119,6 @@ var ProjectCard = GObject.registerClass({}, class ProjectCard extends St.Button 
     const linkIconBin = new St.Bin({
       style_class: 'link-icon-bin',
       x_expand: false,
-      y_expand: false,
       x_align: St.Align.END,
       child: new IconButton({
         icon_name: 'open-link-symbolic',

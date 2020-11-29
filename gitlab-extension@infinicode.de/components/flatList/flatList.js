@@ -17,7 +17,7 @@ var FlatList = GObject.registerClass({
 }, class FlatList extends St.ScrollView {
   _init () {
     super._init({
-      style_class: 'scrollBox',
+      style_class: 'scroll-box',
       overlay_scrollbars: true,
       x_expand: true,
       y_expand: true,
@@ -49,7 +49,6 @@ var FlatList = GObject.registerClass({
 
     const listInfo = new St.Button({
       style_class: 'flat-list-loading-text',
-
       label: text || Translations.LOADING_DATA
     })
 

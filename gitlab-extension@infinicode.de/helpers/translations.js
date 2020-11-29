@@ -16,7 +16,13 @@ var Translations = {
   LOADING_DATA_ERROR: _('Error loading data'),
   LOADING_DATA_ERROR_SPECIFIC: _('Error Loading %s: %s'),
   PIPELINES: _('Pipelines'),
-  TOKEN_ERROR: _('Can not fetch data without token. Please open settings and add a token.')
+  TOKEN_ERROR: _('No accounts configured. Please open settings and add at least one gitlab account.'),
+
+  SETTINGS: {
+    ACCOUNT_NAME: _('Name'),
+    TOKEN: _('Token'),
+    API_ENDPOINT: _('API Endpoint')
+  }
 }
 
 /**

@@ -1,7 +1,7 @@
 /* jshint esnext:true */
 /*
  *
- * GNOME Shell Extension for the beautiful Gitlab Portal
+ * GNOME Shell Extension for the beautiful GitLab Portal
  *
  * Copyright (C) 2020 * Florijan Hamzic <florijanh@gmail.com> *
  *
@@ -43,8 +43,8 @@ const MenuPosition = {
   LEFT: 2
 }
 
-var GitlabPanelMenuButton = GObject.registerClass(
-    class GitlabMenuButton extends PanelMenu.Button {
+var GitLabPanelMenuButton = GObject.registerClass(
+    class GitLabMenuButton extends PanelMenu.Button {
       _init () {
         super._init(0.5)
 
@@ -55,26 +55,25 @@ var GitlabPanelMenuButton = GObject.registerClass(
           style_class: 'system-status-icon'
         })
 
-        let box = new St.BoxLayout({ style_class: 'clock-display-box' })
-        box.add_actor(panelMenuIcon)
+        const gitlabPanelIconBin = new St.Bin({
+          style_class: 'gitlab-panel-bin',
+          child: panelMenuIcon
+        })
 
-        this.add_actor(box)
-        this.add_style_class_name('gitlab-extension-panel-button')
+        this.add_actor(gitlabPanelIconBin)
+        this.add_style_class_name('gitlab-extension')
 
-        let bin = new St.Widget()
+        let bin = new St.Widget({ style_class: 'gitlab-extension' })
         // For some minimal compatibility with PopupMenuItem
         bin._delegate = this
         this.menu.box.add_child(bin)
 
-        const mainContentBox = new St.BoxLayout({ name: 'gitlab-extension-main-box' })
-        bin.add_actor(mainContentBox)
+        this._screenWrapper = new ScreenWrapper()
+        bin.add_actor(this._screenWrapper)
 
         Settings.connect('changed', () => this._sync())
 
         this._sync()
-
-        this._messageList = new ScreenWrapper()
-        mainContentBox.add_child(this._messageList)
 
         EventHandler.connect('hide-panel', () => this.menu.close())
       }
@@ -90,7 +89,7 @@ var GitlabPanelMenuButton = GObject.registerClass(
           return
         }
 
-        this.actor.get_parent().remove_actor(this.actor)
+        this.get_parent().remove_actor(this.actor)
 
         switch (this._currentPanelPosition) {
           case MenuPosition.LEFT:
@@ -140,7 +139,7 @@ function init (extensionMeta) {
 }
 
 function enable () {
-  gitlabPanelMenuButton = new GitlabPanelMenuButton()
+  gitlabPanelMenuButton = new GitLabPanelMenuButton()
   Main.panel.addToStatusArea('gitlabMenu', gitlabPanelMenuButton)
 }
 
