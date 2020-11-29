@@ -56,7 +56,7 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
   }
 
   async _loadData () {
-    if (!Settings.gitlab_token) {
+    if (!Settings.selected_gitlab_account) {
       this._list.show_error_info(Translations.TOKEN_ERROR)
       return
     }

@@ -1,7 +1,49 @@
+const { GLib } = imports.gi
+
+let CACHE = {}
+const CACHE_TIME = 10 * 1000
+
 const _MS_PER_SECONDS = 1000
 const _MS_PER_MINUTE = 1000 * 60
 const _MS_PER_HOUR = 1000 * 60 * 60
 const _MS_PER_DAY = 1000 * 60 * 60 * 24
+
+var isNullOrUndefined = value => typeof value === 'undefined' || value === null
+var isNullOrEmpty = value => isNullOrUndefined(value) || value.length === 0
+var fallbackIfNaN = value => typeof value === 'undefined' || value === null || isNaN(value) ? '--' : value
+
+var decodeBase64JsonOrDefault = (encodedJson, defaultValue) => {
+  try {
+    const value = JSON.parse(GLib.base64_decode(encodedJson))
+
+    if (!value) {
+      return defaultValue
+    }
+
+    return value
+  } catch (e) {
+    log(`failed to decode base64 json ${e}`)
+    return defaultValue
+  }
+}
+
+var clearCache = () => {
+  CACHE = {}
+}
+
+var cacheOrDefault = async (cacheKey, evaluator, cacheDuration = CACHE_TIME) => {
+  const [timestamp, data] = CACHE[cacheKey] || []
+
+  if (timestamp && data && timestamp + cacheDuration >= Date.now()) {
+    return data
+  }
+
+  const freshData = await evaluator()
+
+  CACHE[cacheKey] = [Date.now(), freshData]
+
+  return freshData
+}
 
 var getPipelineStatusIconName = status => {
   switch (status) {
