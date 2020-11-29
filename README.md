@@ -1,15 +1,19 @@
-# gitlab-extension
+# [gitlab-extension](https://extensions.gnome.org/extension/3535/gitlab-extension/)
+[![Actions Status: Build & Create Package](https://github.com/cinatic/gitlab-extension/workflows/Build%20%26%20Create%20Package/badge.svg)](https://github.com/cinatic/gitlab-extension/actions?query=workflow%3A"Build+&+Create+Package")
+[![Actions Status: Build Package & Create Release](https://github.com/cinatic/gitlab-extension/workflows/Build%20Package%20%26%20Create%20Release/badge.svg)](https://github.com/cinatic/gitlab-extension/actions?query=workflow%3A"Build+Package+&+Create+Release")
+
 GitLab extension utilizes the official GitLab API to provide a comfortable overview about your projects, 
 commits & pipelines.
 
+<p align="middle">
 <img alt="projects" src="https://github.com/cinatic/gitlab-extension/raw/master/images/projects.png" width="350">
 <img alt="commits" src="https://github.com/cinatic/gitlab-extension/raw/master/images/commits.png" width="350">
-<img alt="pipelines" src="https://github.com/cinatic/gitlab-extension/raw/master/images/pipelines.png" width="350">
+</p>
 
 ### Setup
 Either install it: 
-- via EGS https://extensions.gnome.org/ 
-- download a release: https://github.com/cinatic/gitlab-extension/releases
+- via EGS https://extensions.gnome.org/extension/3535/gitlab-extension/
+- Or download latest release: https://github.com/cinatic/gitlab-extension/releases/latest
 
 ## Data Source
 The data is fetched from the official GitLab API https://docs.gitlab.com/ee/api/. 
@@ -22,7 +26,6 @@ If you want to play with the API you might be interested in this postman collect
 
 ## TODO
 
-- caching
 - lazy loading of additional data (like project pipeline status)
 - detail view for commits
 - detail view for pipeline w/ nice jobs visualization
