@@ -49,6 +49,7 @@ var GitLabPanelMenuButton = GObject.registerClass(
         super._init(0.5)
 
         this._currentPanelPosition = null
+        this._settingsChangedId = null
 
         const panelMenuIcon = new St.Icon({
           gicon: ComponentsHelper.getCustomIconPath('gitlab-symbolic'),
@@ -71,11 +72,11 @@ var GitLabPanelMenuButton = GObject.registerClass(
         this._screenWrapper = new ScreenWrapper()
         bin.add_actor(this._screenWrapper)
 
-        Settings.connect('changed', () => this._sync())
+        this._settingsChangedId = Settings.connect('changed', () => this._sync())
+        this.menu.connect('destroy', this._onDestroy.bind(this))
+        EventHandler.connect('hide-panel', () => this.menu.close())
 
         this._sync()
-
-        EventHandler.connect('hide-panel', () => this.menu.close())
       }
 
       _sync () {
@@ -122,12 +123,10 @@ var GitLabPanelMenuButton = GObject.registerClass(
         this._currentPanelPosition = newPosition
       }
 
-      stop () {
-        // TODO:
-        // clear cache (add cache before ^^)
-        // ensure if destroy signal is bubbled correctly
-        //   - unregister signal connections
-        //   - dispose components
+      _onDestroy () {
+        if (this._settingsChangedId) {
+          Settings.disconnect(this._settingsChangedId)
+        }
       }
     }
 )
@@ -144,6 +143,5 @@ function enable () {
 }
 
 function disable () {
-  gitlabPanelMenuButton.stop()
   gitlabPanelMenuButton.destroy()
 }

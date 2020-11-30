@@ -21,6 +21,8 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
       vertical: true
     })
 
+    this._settingsChangedId = null
+
     const searchBar = new SearchBar()
     this._list = new FlatList()
 
@@ -39,7 +41,7 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
 
     searchBar.connect('text-change', (sender, searchText) => this._filter_results(searchText))
 
-    Settings.connect('changed', (value, key) => {
+    this._settingsChangedId = Settings.connect('changed', (value, key) => {
       if (key === 'gitlab-accounts' || key === 'selected-gitlab-account-index') {
         this._loadData()
       }
@@ -53,6 +55,8 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
         item: item.cardItem
       }
     }))
+
+    this.connect('destroy', this._onDestroy.bind(this))
 
     this._loadData()
   }
@@ -107,5 +111,11 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
 
       this._list.addItem(new ProjectCard(project, latestPipeline))
     })
+  }
+
+  _onDestroy () {
+    if (this._settingsChangedId) {
+      Settings.disconnect(this._settingsChangedId)
+    }
   }
 })

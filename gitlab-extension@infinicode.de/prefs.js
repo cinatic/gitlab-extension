@@ -30,6 +30,8 @@ var PrefsWidget = GObject.registerClass({
     }))
 
     this.configWidgets = []
+    this._settingsChangedId = null
+
     this.Window = new Gtk.Builder()
 
     this.initWindow()
@@ -46,6 +48,8 @@ var PrefsWidget = GObject.registerClass({
     this.evaluateValues()
 
     this.add(this.MainWidget)
+
+    this.connect('destroy', this._onDestroy.bind(this))
 
     this.MainWidget.connect('realize', () => {
       if (inRealize) {
@@ -87,6 +91,12 @@ var PrefsWidget = GObject.registerClass({
     }
 
     this._initTreeView()
+  }
+
+  _onDestroy () {
+    if (this._settingsChangedId) {
+      this.Settings.disconnect(this._settingsChangedId)
+    }
   }
 
   clearEntry () {
@@ -143,7 +153,7 @@ var PrefsWidget = GObject.registerClass({
 
   loadConfig () {
     this.Settings = Settings.getSettings()
-    this.Settings.connect('changed', this.evaluateValues.bind(this))
+    this._settingsChangedId = this.Settings.connect('changed', this.evaluateValues.bind(this))
   }
 
   evaluateValues () {

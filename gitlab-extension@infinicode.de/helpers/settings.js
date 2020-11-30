@@ -95,10 +95,11 @@ const Handler = class {
       const oldToken = this._settings.get_string(GITLAB_TOKEN)
 
       if (oldToken) {
-        const newData = [{
-          ...DEFAULT_GITLAB_DATA,
-          token: oldToken
-        }]
+        const newData = [
+          {
+            ...DEFAULT_GITLAB_DATA,
+            token: oldToken
+          }]
 
         this._settings.set_string(GITLAB_TOKEN, '')
         this._settings.set_string(GITLAB_ACCOUNTS, GLib.base64_encode(JSON.stringify(newData)))
@@ -114,7 +115,11 @@ const Handler = class {
   }
 
   connect (identifier, onChange) {
-    this._settings.connect(identifier, onChange)
+    return this._settings.connect(identifier, onChange)
+  }
+
+  disconnect (connectId) {
+    this._settings.disconnect(connectId)
   }
 }
 
