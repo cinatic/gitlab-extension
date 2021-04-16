@@ -1,24 +1,14 @@
-const { GLib, Gtk, GObject } = imports.gi
+const { Gio, Gtk, GObject } = imports.gi
 
-const Mainloop = imports.mainloop
+const Config = imports.misc.config
 const ExtensionUtils = imports.misc.extensionUtils
 const Me = ExtensionUtils.getCurrentExtension()
 
-const { decodeBase64JsonOrDefault } = Me.imports.helpers.data
-const Settings = Me.imports.helpers.settings
+const { getSettings, Settings } = Me.imports.helpers.settings
 const { initTranslations, Translations } = Me.imports.helpers.translations
 
 const EXTENSIONDIR = Me.dir.get_path()
 
-const POSITION_IN_PANEL_KEY = 'position-in-panel'
-const GITLAB_TOKEN = 'gitlab-token'
-const GITLAB_ACCOUNTS = 'gitlab-accounts'
-
-let inRealize = false
-
-let defaultSize = [-1, -1]
-
-let i = 0
 var PrefsWidget = GObject.registerClass({
   GTypeName: 'GitLabExtensionPrefsWidget'
 }, class Widget extends Gtk.Box {
@@ -29,144 +19,75 @@ var PrefsWidget = GObject.registerClass({
       spacing: 0
     }))
 
-    this.configWidgets = []
-    this._settingsChangedId = null
-
     this.Window = new Gtk.Builder()
 
+    this.loadConfig()
     this.initWindow()
 
-    defaultSize = this.MainWidget.get_size_request()
-    let borderWidth = this.MainWidget.get_border_width()
-
-    defaultSize[0] += 2 * borderWidth
-    defaultSize[1] += 2 * borderWidth
-
-    this.MainWidget.set_size_request(-1, -1)
-    this.MainWidget.set_border_width(0)
-
-    this.evaluateValues()
-
-    this.add(this.MainWidget)
-
-    this.connect('destroy', this._onDestroy.bind(this))
-
-    this.MainWidget.connect('realize', () => {
-      if (inRealize) {
-        return
-      }
-      inRealize = true
-
-      this.MainWidget.get_toplevel().resize(defaultSize[0], defaultSize[1])
-      inRealize = false
-    })
+    if (isGnome4()) {
+      this.append(this.MainWidget)
+    } else {
+      this.add(this.MainWidget)
+    }
   }
 
   initWindow () {
-    this.Window.add_from_file(EXTENSIONDIR + '/settings.ui')
+    let uiFile = EXTENSIONDIR + '/settings.ui'
 
+    if (isGnome4()) {
+      uiFile = EXTENSIONDIR + '/settings_40.ui'
+    }
+
+    this.Window.add_from_file(uiFile)
     this.MainWidget = this.Window.get_object('main-widget')
 
-    let theObjects = this.Window.get_objects()
-    for (let i in theObjects) {
-      let name = theObjects[i].get_name ? theObjects[i].get_name() : 'dummy'
+    const gtkConfigObjects = this.Window.get_objects()
 
-      if (this[name] !== undefined) {
-        if (theObjects[i].class_path()[1].indexOf('GtkEntry') != -1) {
-          this.initEntry(theObjects[i])
-        } else if (theObjects[i].class_path()[1].indexOf('GtkComboBoxText') != -1) {
-          this.initComboBox(theObjects[i])
-        } else if (theObjects[i].class_path()[1].indexOf('GtkSwitch') != -1) {
-          this.initSwitch(theObjects[i])
-        } else if (theObjects[i].class_path()[1].indexOf('GtkScale') != -1) {
-          this.initScale(theObjects[i])
-        }
+    gtkConfigObjects.forEach(gtkWidget => {
+      const gtkUiIdentifier = getWidgetUiIdentifier(gtkWidget)
+      const widgetType = getWidgetType(gtkWidget)
 
-        this.configWidgets.push([theObjects[i], name])
+      if (gtkUiIdentifier && (gtkUiIdentifier.startsWith('new-') || gtkUiIdentifier.startsWith('edit-'))) {
+        return
       }
-    }
+
+      switch (widgetType) {
+        case 'GtkComboBoxText':
+          this.initComboBox(gtkWidget, gtkUiIdentifier)
+          break
+
+        case 'GtkSwitch':
+          this.initSwitch(gtkWidget, gtkUiIdentifier)
+          break
+
+        case 'GtkSpinButton':
+          this.initSpinner(gtkWidget, gtkUiIdentifier)
+          break
+      }
+    })
 
     if (Me.metadata.version !== undefined) {
       this.Window.get_object('version').set_label(Me.metadata.version.toString())
     }
 
     this._initTreeView()
-  }
-
-  _onDestroy () {
-    if (this._settingsChangedId) {
-      this.Settings.disconnect(this._settingsChangedId)
-    }
-  }
-
-  clearEntry () {
-    arguments[0].set_text('')
-  }
-
-  initEntry (theEntry) {
-    let name = theEntry.get_name()
-    theEntry.text = this[name]
-    if (this[name].length != 32) {
-      theEntry.set_icon_from_icon_name(Gtk.PositionType.LEFT, 'dialog-warning')
-    }
-
-    theEntry.connect('notify::text', () => {
-      let key = arguments[0].text
-      this[name] = key
-      if (key.length == 32) {
-        theEntry.set_icon_from_icon_name(Gtk.PositionType.LEFT, '')
-      } else {
-        theEntry.set_icon_from_icon_name(Gtk.PositionType.LEFT, 'dialog-warning')
-      }
-    })
-  }
-
-  initComboBox (theComboBox) {
-    let name = theComboBox.get_name()
-    theComboBox.connect('changed', () =>
-        this[name] = arguments[0].active
-    )
-  }
-
-  initSwitch (theSwitch) {
-    let name = theSwitch.get_name()
-
-    theSwitch.connect('notify::active', () =>
-        this[name] = arguments[0].active
-    )
-  }
-
-  initScale (theScale) {
-    let name = theScale.get_name()
-    theScale.set_value(this[name])
-    this[name + 'Timeout'] = undefined
-    theScale.connect('value-changed', (slider) => {
-      if (this[name + 'Timeout'] !== undefined) {
-        Mainloop.source_remove(this[name + 'Timeout'])
-      }
-      this[name + 'Timeout'] = Mainloop.timeout_add(250, () => {
-        this[name] = slider.get_value()
-        return false
-      })
-    })
+    this.recreateTreeViewColumns()
   }
 
   loadConfig () {
-    this.Settings = Settings.getSettings()
-    this._settingsChangedId = this.Settings.connect('changed', this.evaluateValues.bind(this))
+    this.Settings = getSettings()
   }
 
-  evaluateValues () {
-    this.recreateTreeViewColumns()
+  initSpinner (gtkWidget, identifier) {
+    this.Settings.bind(identifier, gtkWidget, 'value', Gio.SettingsBindFlags.DEFAULT)
+  }
 
-    const config = this.configWidgets
+  initComboBox (gtkWidget, identifier) {
+    this.Settings.bind(identifier, gtkWidget, 'active-id', Gio.SettingsBindFlags.DEFAULT)
+  }
 
-    for (let i in config) {
-
-      if (config[i][0].active != this[config[i][1]]) {
-        config[i][0].active = this[config[i][1]]
-      }
-    }
+  initSwitch (gtkWidget, identifier) {
+    this.Settings.bind(identifier, gtkWidget, 'active', Gio.SettingsBindFlags.DEFAULT)
   }
 
   _initTreeView () {
@@ -185,7 +106,7 @@ var PrefsWidget = GObject.registerClass({
 
     // TreeView / Table Buttons
     this.Window.get_object('tree-toolbutton-add').connect('clicked', () => {
-      this.createGitLabAccountWidget.show_all()
+      this.createGitLabAccountWidget.show()
     })
 
     this.Window.get_object('tree-toolbutton-remove').connect('clicked', this.removeGitLabAccountItem.bind(this))
@@ -246,7 +167,7 @@ var PrefsWidget = GObject.registerClass({
    * this recreates the TreeView (Symbol Table)
    */
   recreateTreeViewColumns () {
-    const gitlabAccounts = this.gitlabAccounts
+    const gitlabAccounts = Settings.gitlab_accounts
 
     this.treeview = this.Window.get_object('tree-treeview')
     this.liststore = this.Window.get_object('tree-liststore')
@@ -285,7 +206,7 @@ var PrefsWidget = GObject.registerClass({
 
     // check if we have data (normally we should otherwise it could not be selected...)
     const selectionIndex = parseInt(selection[0][0].to_string())
-    const selectedItem = this.gitlabAccounts[selectionIndex]
+    const selectedItem = Settings.gitlab_accounts[selectionIndex]
 
     if (!selectedItem) {
       return
@@ -295,7 +216,7 @@ var PrefsWidget = GObject.registerClass({
     this.editAccountTokenInput.set_text(selectedItem.token)
     this.editAccountApiEndpointInput.set_text(selectedItem.apiEndpoint)
 
-    this.editGitLabAccountWidget.show_all()
+    this.editGitLabAccountWidget.show()
   }
 
   /**
@@ -313,7 +234,9 @@ var PrefsWidget = GObject.registerClass({
     }
 
     // append new item and write it to config
-    this.gitlabAccounts = [...this.gitlabAccounts, newItem]
+    Settings.gitlab_accounts = [...Settings.gitlab_accounts, newItem]
+
+    this.recreateTreeViewColumns()
 
     this.createGitLabAccountWidget.hide()
   }
@@ -329,7 +252,7 @@ var PrefsWidget = GObject.registerClass({
       return
     }
 
-    const gitlabAccounts = this.gitlabAccounts
+    const gitlabAccounts = Settings.gitlab_accounts
     const selectionIndex = parseInt(selection[0][0].to_string())
     const selectedItem = gitlabAccounts[selectionIndex]
 
@@ -348,7 +271,9 @@ var PrefsWidget = GObject.registerClass({
     }
 
     gitlabAccounts[selectionIndex] = newItem
-    this.gitlabAccounts = gitlabAccounts
+    Settings.gitlab_accounts = gitlabAccounts
+
+    this.recreateTreeViewColumns()
 
     this.editGitLabAccountWidget.hide()
   }
@@ -364,7 +289,7 @@ var PrefsWidget = GObject.registerClass({
       return
     }
 
-    const gitlabAccounts = this.gitlabAccounts
+    const gitlabAccounts = Settings.gitlab_accounts
     const selectionIndex = parseInt(selection[0][0].to_string())
     const selectedItem = gitlabAccounts[selectionIndex]
 
@@ -374,65 +299,37 @@ var PrefsWidget = GObject.registerClass({
 
     gitlabAccounts.splice(selectionIndex, 1)
 
-    this.gitlabAccounts = gitlabAccounts
-  }
+    Settings.gitlab_accounts = gitlabAccounts
 
-  // The names must be equal to the ID in settings.ui!
-  get position_in_panel () {
-    if (!this.Settings) {
-      this.loadConfig()
-    }
-    return this.Settings.get_enum(POSITION_IN_PANEL_KEY)
-  }
-
-  set position_in_panel (v) {
-    if (!this.Settings) {
-      this.loadConfig()
-    }
-
-    this.Settings.set_enum(POSITION_IN_PANEL_KEY, v)
-  }
-
-  get gitlabAccounts () {
-    if (!this.Settings) {
-      this.loadConfig()
-    }
-
-    /****
-     * For backwards compatiblity intercept here and check if old token exist
-     * if we found old format convert to new format and save
-     */
-    try {
-      const oldToken = this.Settings.get_string(GITLAB_TOKEN)
-
-      if (oldToken) {
-        const newData = [
-          {
-            ...Settings.DEFAULT_GITLAB_DATA,
-            token: oldToken
-          }]
-
-        this.Settings.set_string(GITLAB_TOKEN, '')
-        this.Settings.set_string(GITLAB_ACCOUNTS, GLib.base64_encode(JSON.stringify(newData)))
-
-        return newData
-      }
-    } catch (e) {
-      log(`failed to convert old token ${e}`)
-    }
-
-    const rawString = this.Settings.get_string(GITLAB_ACCOUNTS)
-    return decodeBase64JsonOrDefault(rawString, [])
-  }
-
-  set gitlabAccounts (v) {
-    if (!this.Settings) {
-      this.loadConfig()
-    }
-
-    this.Settings.set_string(GITLAB_ACCOUNTS, GLib.base64_encode(JSON.stringify(v)))
+    this.recreateTreeViewColumns()
   }
 })
+
+const getWidgetUiIdentifier = gtkWidget => {
+  if (isGnome4()) {
+    return gtkWidget.get_buildable_id ? gtkWidget.get_buildable_id() : null
+  }
+
+  return gtkWidget.get_name ? gtkWidget.get_name() : null
+}
+
+const getWidgetType = gtkWidget => {
+  if (isGnome4()) {
+    return gtkWidget.get_name ? gtkWidget.get_name() : null
+  }
+
+  const classPaths = gtkWidget.class_path ? gtkWidget.class_path()[1] : []
+
+  if (classPaths.indexOf('GtkSwitch') !== -1) {
+    return 'GtkSwitch'
+  } else if (classPaths.indexOf('GtkComboBoxText') !== -1) {
+    return 'GtkComboBoxText'
+  } else if (classPaths.indexOf('GtkSpinButton') !== -1) {
+    return 'GtkSpinButton'
+  }
+}
+
+const isGnome4 = () => Config.PACKAGE_VERSION.startsWith('4')
 
 // this is called when settings has been opened
 var init = () => {
@@ -441,6 +338,6 @@ var init = () => {
 
 function buildPrefsWidget () {
   let widget = new PrefsWidget()
-  widget.show_all()
+  widget.show()
   return widget
 }

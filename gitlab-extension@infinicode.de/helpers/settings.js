@@ -114,6 +114,10 @@ const Handler = class {
     return decodeBase64JsonOrDefault(rawString, [])
   }
 
+  set gitlab_accounts (v) {
+    this._settings.set_string(GITLAB_ACCOUNTS, GLib.base64_encode(JSON.stringify(v)))
+  }
+
   connect (identifier, onChange) {
     return this._settings.connect(identifier, onChange)
   }
