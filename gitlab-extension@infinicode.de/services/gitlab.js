@@ -10,11 +10,11 @@ const headers = token => ({
 })
 
 var getOwnedProjects = async ({ per_page }) => {
-  const { name: accountName, apiEndpoint, token } = Settings.selected_gitlab_account || {}
+  const { name: accountName, apiEndpoint, token, onlyOwnedProjects } = Settings.selected_gitlab_account || {}
 
   return cacheOrDefault(`projects_${apiEndpoint}_${accountName}`, () => {
     const queryParameters = {
-      owned: 0,
+      owned: onlyOwnedProjects,
       order_by: 'last_activity_at',
       per_page
     }
