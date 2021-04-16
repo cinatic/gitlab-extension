@@ -9,10 +9,21 @@ const { FlatList } = Me.imports.components.flatList.flatList
 const { ProjectSelectButtons } = Me.imports.components.gitlab.projectSelectButtons
 const { ProjectCard } = Me.imports.components.cards.projectCard
 const { SearchBar } = Me.imports.components.searchBar.searchBar
-const { Settings } = Me.imports.helpers.settings
+
+const {
+  Settings,
+  GITLAB_ACCOUNTS,
+  SELECTED_GITLAB_ACCOUNT_INDEX
+} = Me.imports.helpers.settings
+
 const { Translations } = Me.imports.helpers.translations
 
 const GitLabService = Me.imports.services.gitlab
+
+const SETTINGS_KEYS_TO_REFRESH = [
+  GITLAB_ACCOUNTS,
+  SELECTED_GITLAB_ACCOUNT_INDEX
+]
 
 var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.BoxLayout {
   _init () {
@@ -42,7 +53,7 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
     searchBar.connect('text-change', (sender, searchText) => this._filter_results(searchText))
 
     this._settingsChangedId = Settings.connect('changed', (value, key) => {
-      if (key === 'gitlab-accounts' || key === 'selected-gitlab-account-index') {
+      if (SETTINGS_KEYS_TO_REFRESH.includes(key)) {
         this._loadData()
       }
 
