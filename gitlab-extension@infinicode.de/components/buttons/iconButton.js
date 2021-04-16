@@ -10,7 +10,7 @@ var IconButton = GObject.registerClass({}, class IconButton extends St.Button {
       reactive: true,
       can_focus: true,
       track_hover: true,
-      style_class: 'icon-button ' + (style_class || ''),
+      style_class: 'icon-button button ' + (style_class || ''),
       y_align: Clutter.ActorAlign.CENTER,
       ...props
     })
