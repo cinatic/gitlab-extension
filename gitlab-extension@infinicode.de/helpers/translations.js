@@ -21,7 +21,8 @@ var Translations = {
   SETTINGS: {
     ACCOUNT_NAME: _('Name'),
     TOKEN: _('Token'),
-    API_ENDPOINT: _('API Endpoint')
+    API_ENDPOINT: _('API Endpoint'),
+    ONLY_OWNED_PROJECTS: _('Only Owned Projects')
   }
 }
 

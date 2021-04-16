@@ -3,7 +3,7 @@ const { GLib, Gio } = imports.gi
 const ExtensionUtils = imports.misc.extensionUtils
 const Me = ExtensionUtils.getCurrentExtension()
 
-const { decodeBase64JsonOrDefault, isNullOrEmpty } = Me.imports.helpers.data
+const { decodeBase64JsonOrDefault, isNullOrEmpty, isNullOrUndefined } = Me.imports.helpers.data
 
 const POSITION_IN_PANEL_KEY = 'position-in-panel'
 const GITLAB_TOKEN = 'gitlab-token'
@@ -14,7 +14,8 @@ var SETTINGS_SCHEMA_DOMAIN = 'org.gnome.shell.extensions.gitlab'
 
 var DEFAULT_GITLAB_DATA = {
   name: 'gitlab.com',
-  apiEndpoint: 'https://gitlab.com/api/v4'
+  apiEndpoint: 'https://gitlab.com/api/v4',
+  onlyOwnedProjects: false
 }
 
 /**
@@ -87,6 +88,35 @@ const Handler = class {
   }
 
   get gitlab_accounts () {
+    const accounts = this._loadAndValidateAccounts()
+
+    return accounts
+  }
+
+  set gitlab_accounts (v) {
+    this._settings.set_string(GITLAB_ACCOUNTS, GLib.base64_encode(JSON.stringify(v)))
+  }
+
+  connect (identifier, onChange) {
+    return this._settings.connect(identifier, onChange)
+  }
+
+  disconnect (connectId) {
+    this._settings.disconnect(connectId)
+  }
+
+  _loadAndValidateAccounts () {
+    let accounts = this._migrateAccountsFromSingleAccountStructure()
+
+    if (isNullOrEmpty(accounts)) {
+      const rawString = this._settings.get_string(GITLAB_ACCOUNTS)
+      accounts = decodeBase64JsonOrDefault(rawString, [])
+    }
+
+    return this._ensureHealthyGitlabAccountStructure(accounts)
+  }
+
+  _migrateAccountsFromSingleAccountStructure () {
     /****
      * For backwards compatiblity intercept here and check if old token exist
      * if we found old format convert to new format and save
@@ -109,21 +139,23 @@ const Handler = class {
     } catch (e) {
       log(`failed to convert old token ${e}`)
     }
-
-    const rawString = this._settings.get_string(GITLAB_ACCOUNTS)
-    return decodeBase64JsonOrDefault(rawString, [])
   }
 
-  set gitlab_accounts (v) {
-    this._settings.set_string(GITLAB_ACCOUNTS, GLib.base64_encode(JSON.stringify(v)))
-  }
+  _ensureHealthyGitlabAccountStructure (accounts) {
+    let normalizedAccounts = []
 
-  connect (identifier, onChange) {
-    return this._settings.connect(identifier, onChange)
-  }
+    try {
+      normalizedAccounts = accounts.map(item => ({
+        name: item.name || DEFAULT_GITLAB_DATA.name,
+        apiEndpoint: item.apiEndpoint || DEFAULT_GITLAB_DATA.apiEndpoint,
+        token: item.token || '',
+        onlyOwnedProjects: isNullOrUndefined(item.onlyOwnedProjects) ? DEFAULT_GITLAB_DATA.onlyOwnedProjects : item.onlyOwnedProjects
+      }))
+    } catch (e) {
+      log(`failed to normalize accounts data ${e}`)
+    }
 
-  disconnect (connectId) {
-    this._settings.disconnect(connectId)
+    return normalizedAccounts
   }
 }
 
