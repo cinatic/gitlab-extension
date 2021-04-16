@@ -332,18 +332,17 @@
   </object>
   <object class="GtkListStore" id="tree-liststore">
     <columns>
-      <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name token -->
+      <column type="gboolean"/>
       <column type="gchararray"/>
-      <!-- column-name api-endpoint -->
       <column type="gchararray"/>
     </columns>
     <data>
       <row>
         <col id="0">gitlab.com</col>
-        <col id="1">Token</col>
-        <col id="2">https://gitlab.com/api/v4</col>
+        <col id="1">False</col>
+        <col id="2">Token</col>
+        <col id="3">https://gitlab.com/api/v4</col>
       </row>
     </data>
   </object>

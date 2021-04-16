@@ -140,6 +140,36 @@ var PrefsWidget = GObject.registerClass({
       cell.markup = model.get_value(iter, 0)
     })
 
+    /**** only owned projects cell ****/
+    const toggleRenderer = new Gtk.CellRendererToggle()
+    toggleRenderer.set_activatable(true)
+
+    toggleRenderer.connect('toggled', (cell, path) => {
+      const treePath = Gtk.TreePath.new_from_string(path)
+      const itemIndex = treePath.get_indices()[0]
+
+      const accounts = Settings.gitlab_accounts
+      const toggledItem = accounts[itemIndex]
+
+      toggledItem.onlyOwnedProjects = !toggledItem.onlyOwnedProjects
+
+      accounts[itemIndex] = toggledItem
+
+      Settings.gitlab_accounts = accounts
+
+      this.recreateTreeViewColumns()
+    })
+
+    const onlyOwnedProjectsColumn = new Gtk.TreeViewColumn()
+    onlyOwnedProjectsColumn.set_title(Translations.SETTINGS.ONLY_OWNED_PROJECTS)
+    this.treeview.append_column(onlyOwnedProjectsColumn)
+
+    onlyOwnedProjectsColumn.pack_start(toggleRenderer, null)
+
+    onlyOwnedProjectsColumn.set_cell_data_func(toggleRenderer, function (tree, cell, model, iter) {
+      cell.active = model.get_value(iter, 1)
+    })
+
     /**** token cell ****/
     const tokenColumn = new Gtk.TreeViewColumn()
     tokenColumn.set_title(Translations.SETTINGS.TOKEN)
@@ -148,7 +178,7 @@ var PrefsWidget = GObject.registerClass({
     tokenColumn.pack_start(renderer, null)
 
     tokenColumn.set_cell_data_func(renderer, (tree, cell, model, iter) => {
-      cell.markup = model.get_value(iter, 1)
+      cell.markup = model.get_value(iter, 2)
     })
 
     /**** api-endpoint cell ****/
@@ -159,7 +189,7 @@ var PrefsWidget = GObject.registerClass({
     apiEndpointColumn.pack_start(renderer, null)
 
     apiEndpointColumn.set_cell_data_func(renderer, function (tree, cell, model, iter) {
-      cell.markup = model.get_value(iter, 2)
+      cell.markup = model.get_value(iter, 3)
     })
   }
 
@@ -187,8 +217,9 @@ var PrefsWidget = GObject.registerClass({
 
         current = this.liststore.append()
         this.liststore.set_value(current, 0, accountItem.name)
-        this.liststore.set_value(current, 1, accountItem.token)
-        this.liststore.set_value(current, 2, accountItem.apiEndpoint)
+        this.liststore.set_value(current, 1, accountItem.onlyOwnedProjects)
+        this.liststore.set_value(current, 2, accountItem.token)
+        this.liststore.set_value(current, 3, accountItem.apiEndpoint)
       })
     }
   }
