@@ -73,7 +73,7 @@ var GitLabPanelMenuButton = GObject.registerClass(
         bin.add_actor(this._screenWrapper)
 
         this._settingsChangedId = Settings.connect('changed', () => this._sync())
-        this.menu.connect('destroy', this._onDestroy.bind(this))
+        this.menu.connect('destroy', this._destroyExtension.bind(this))
         EventHandler.connect('hide-panel', () => this.menu.close())
 
         this._sync()
@@ -123,7 +123,7 @@ var GitLabPanelMenuButton = GObject.registerClass(
         this._currentPanelPosition = newPosition
       }
 
-      _onDestroy () {
+      _destroyExtension () {
         if (this._settingsChangedId) {
           Settings.disconnect(this._settingsChangedId)
         }
