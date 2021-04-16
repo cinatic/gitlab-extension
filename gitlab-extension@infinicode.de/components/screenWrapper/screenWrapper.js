@@ -1,4 +1,4 @@
-const { Clutter, GObject, St } = imports.gi
+const { GObject, St } = imports.gi
 
 const ExtensionUtils = imports.misc.extensionUtils
 const Me = ExtensionUtils.getCurrentExtension()
