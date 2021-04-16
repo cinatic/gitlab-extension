@@ -78,7 +78,7 @@ var SearchBar = GObject.registerClass({
   }
 
   _createButtonBox () {
-    let buttonBox = new St.BoxLayout({
+    const buttonBox = new St.BoxLayout({
       style_class: 'button-box',
       x_align: St.Align.END
     })

@@ -11,11 +11,13 @@ var ProjectSelectButtons = GObject.registerClass({}, class ProjectSelectButtons 
       style_class: 'project-select-buttons'
     })
 
-    Settings.connect('changed', (value, key) => {
+    this._settingsChangedId = Settings.connect('changed', (value, key) => {
       if (key === 'gitlab-accounts' || key === 'selected-gitlab-account-index') {
         this._sync()
       }
     })
+
+    this.connect('destroy', this._onDestroy.bind(this))
 
     this._sync()
   }
@@ -34,7 +36,7 @@ var ProjectSelectButtons = GObject.registerClass({}, class ProjectSelectButtons 
 
       const gitlabAccountButton = new St.Button({
         style_class: `message button ${additionalStyleClasses}`,
-        label: gitlabAccount.name,
+        label: gitlabAccount.name
       })
 
       gitlabAccountButton.connect('clicked', () => {
@@ -43,5 +45,11 @@ var ProjectSelectButtons = GObject.registerClass({}, class ProjectSelectButtons 
 
       this.add_child(gitlabAccountButton)
     })
+  }
+
+  _onDestroy () {
+    if (this._settingsChangedId) {
+      Settings.disconnect(this._settingsChangedId)
+    }
   }
 })

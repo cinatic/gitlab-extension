@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-gitlab-extension\n"
 "Report-Msgid-Bugs-To: fh@infinicode.de\n"
-"POT-Creation-Date: 2020-11-29 16:42+0100\n"
+"POT-Creation-Date: 2021-04-16 20:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,144 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: gitlab-extension@infinicode.de/settings_40.ui:5
 #: gitlab-extension@infinicode.de/settings.ui:7
 msgid "Create GitLab Account"
 msgstr ""
 
+#: gitlab-extension@infinicode.de/settings_40.ui:20
 #: gitlab-extension@infinicode.de/settings.ui:28
 #: gitlab-extension@infinicode.de/helpers/translations.js:22
 msgid "Name"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:32
+#: gitlab-extension@infinicode.de/settings_40.ui:154
+#: gitlab-extension@infinicode.de/settings.ui:46
+#: gitlab-extension@infinicode.de/settings.ui:210
+msgid "gitlab.com"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:43
+#: gitlab-extension@infinicode.de/settings.ui:59
+#: gitlab-extension@infinicode.de/helpers/translations.js:23
+msgid "Token"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:62
+#: gitlab-extension@infinicode.de/settings.ui:86
+#: gitlab-extension@infinicode.de/helpers/translations.js:24
+msgid "API Endpoint"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:72
+#: gitlab-extension@infinicode.de/settings_40.ui:73
+#: gitlab-extension@infinicode.de/settings_40.ui:195
+#: gitlab-extension@infinicode.de/settings.ui:98
+#: gitlab-extension@infinicode.de/settings.ui:103
+#: gitlab-extension@infinicode.de/settings.ui:267
+msgid "https://gitlab.com/api/v4"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:88
+#: gitlab-extension@infinicode.de/settings_40.ui:221
+#: gitlab-extension@infinicode.de/settings.ui:118
+#: gitlab-extension@infinicode.de/settings.ui:294
+msgid "Cancel"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:97
+#: gitlab-extension@infinicode.de/settings_40.ui:233
+#: gitlab-extension@infinicode.de/settings.ui:133
+#: gitlab-extension@infinicode.de/settings.ui:312
+msgid "Save"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:127
+#: gitlab-extension@infinicode.de/settings.ui:171
+msgid "Edit GitLab Account"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:142
+#: gitlab-extension@infinicode.de/settings.ui:192
+msgid "Edit name"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:165
+#: gitlab-extension@infinicode.de/settings.ui:223
+msgid "Edit Token"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:185
+#: gitlab-extension@infinicode.de/settings.ui:251
+msgid "Edit API Endpoint"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:334
+#: gitlab-extension@infinicode.de/settings.ui:455
+msgid "Accounts"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:358
+#: gitlab-extension@infinicode.de/settings.ui:477
+msgid "Position in Panel"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:370
+#: gitlab-extension@infinicode.de/settings.ui:490
+msgid "Left"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:371
+#: gitlab-extension@infinicode.de/settings.ui:491
+msgid "Center"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:372
+#: gitlab-extension@infinicode.de/settings.ui:492
+msgid "Right"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:406
+#: gitlab-extension@infinicode.de/settings.ui:530
+msgid "Layout"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:441
+#: gitlab-extension@infinicode.de/settings.ui:569
+msgid "Version: "
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:448
+#: gitlab-extension@infinicode.de/settings.ui:583
+msgid "unknown (self-build ?)"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:457
+#: gitlab-extension@infinicode.de/settings.ui:603
+msgid ""
+"<span>GitLab will provide you a couple of information about your projects "
+"and pipelines. It utilizes the official <a href=\"https://docs.gitlab.com/ee/"
+"api/\">GitLab API v4</a>. The plan is to have a quick and convenient control "
+"over the latest builds and commits.</span>"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:473
+#: gitlab-extension@infinicode.de/settings.ui:626
+msgid "Maintained by"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:497
+#: gitlab-extension@infinicode.de/settings.ui:677
+msgid ""
+"<span size=\"small\">This program comes with ABSOLUTELY NO WARRANTY.\n"
+"See the <a href=\"https://www.gnu.org/licenses/gpl\">GNU General Public "
+"License, version 3 or later</a> for details.</span>"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/settings_40.ui:509
+#: gitlab-extension@infinicode.de/settings.ui:698
+msgid "About"
 msgstr ""
 
 #: gitlab-extension@infinicode.de/settings.ui:45
@@ -33,108 +164,6 @@ msgstr ""
 #: gitlab-extension@infinicode.de/settings.ui:238
 #: gitlab-extension@infinicode.de/settings.ui:266
 msgid "Clear entry"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:46
-#: gitlab-extension@infinicode.de/settings.ui:210
-msgid "gitlab.com"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:59
-#: gitlab-extension@infinicode.de/helpers/translations.js:23
-msgid "Token"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:86
-#: gitlab-extension@infinicode.de/helpers/translations.js:24
-msgid "API Endpoint"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:98
-#: gitlab-extension@infinicode.de/settings.ui:103
-#: gitlab-extension@infinicode.de/settings.ui:267
-msgid "https://gitlab.com/api/v4"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:118
-#: gitlab-extension@infinicode.de/settings.ui:294
-msgid "Cancel"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:133
-#: gitlab-extension@infinicode.de/settings.ui:312
-msgid "Save"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:171
-msgid "Edit GitLab Account"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:192
-msgid "Edit name"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:223
-msgid "Edit Token"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:251
-msgid "Edit API Endpoint"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:456
-msgid "Accounts"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:478
-msgid "Position in Panel"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:491
-msgid "Center"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:492
-msgid "Right"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:493
-msgid "Left"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:531
-msgid "Layout"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:570
-msgid "Version: "
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:584
-msgid "unknown (self-build ?)"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:604
-msgid ""
-"<span>GitLab will provide you a couple of information about your projects "
-"and pipelines. It utilizes the official <a href=\"https://docs.gitlab.com/ee/"
-"api/\">GitLab API v4</a>. The plan is to have a quick and convenient control "
-"over the latest builds and commits.</span>"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:627
-msgid "Maintained by"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:678
-msgid ""
-"<span size=\"small\">This program comes with ABSOLUTELY NO WARRANTY.\n"
-"See the <a href=\"https://www.gnu.org/licenses/gpl\">GNU General Public "
-"License, version 3 or later</a> for details.</span>"
-msgstr ""
-
-#: gitlab-extension@infinicode.de/settings.ui:699
-msgid "About"
 msgstr ""
 
 #: gitlab-extension@infinicode.de/helpers/translations.js:11
@@ -175,4 +204,8 @@ msgstr ""
 msgid ""
 "No accounts configured. Please open settings and add at least one gitlab "
 "account."
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:25
+msgid "Only Owned Projects"
 msgstr ""

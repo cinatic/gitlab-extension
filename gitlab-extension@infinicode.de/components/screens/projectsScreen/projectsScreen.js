@@ -9,10 +9,21 @@ const { FlatList } = Me.imports.components.flatList.flatList
 const { ProjectSelectButtons } = Me.imports.components.gitlab.projectSelectButtons
 const { ProjectCard } = Me.imports.components.cards.projectCard
 const { SearchBar } = Me.imports.components.searchBar.searchBar
-const { Settings } = Me.imports.helpers.settings
+
+const {
+  Settings,
+  GITLAB_ACCOUNTS,
+  SELECTED_GITLAB_ACCOUNT_INDEX
+} = Me.imports.helpers.settings
+
 const { Translations } = Me.imports.helpers.translations
 
 const GitLabService = Me.imports.services.gitlab
+
+const SETTINGS_KEYS_TO_REFRESH = [
+  GITLAB_ACCOUNTS,
+  SELECTED_GITLAB_ACCOUNT_INDEX
+]
 
 var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.BoxLayout {
   _init () {
@@ -20,6 +31,8 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
       style_class: 'screen projects-screen',
       vertical: true
     })
+
+    this._settingsChangedId = null
 
     const searchBar = new SearchBar()
     this._list = new FlatList()
@@ -39,8 +52,8 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
 
     searchBar.connect('text-change', (sender, searchText) => this._filter_results(searchText))
 
-    Settings.connect('changed', (value, key) => {
-      if (key === 'gitlab-accounts' || key === 'selected-gitlab-account-index') {
+    this._settingsChangedId = Settings.connect('changed', (value, key) => {
+      if (SETTINGS_KEYS_TO_REFRESH.includes(key)) {
         this._loadData()
       }
 
@@ -53,6 +66,8 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
         item: item.cardItem
       }
     }))
+
+    this.connect('destroy', this._onDestroy.bind(this))
 
     this._loadData()
   }
@@ -107,5 +122,11 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
 
       this._list.addItem(new ProjectCard(project, latestPipeline))
     })
+  }
+
+  _onDestroy () {
+    if (this._settingsChangedId) {
+      Settings.disconnect(this._settingsChangedId)
+    }
   }
 })

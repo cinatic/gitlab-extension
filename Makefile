@@ -75,7 +75,7 @@ package: $(BUILD_DIR)
 install: build
 	rm -rf $(INSTALL_DIR)
 	mkdir -p $(INSTALL_DIR)
-	cp -r $(BUILD_DIR)/* $(INSTALL_DIR)
+	cp -r $(BUILD_DIR)/${SRC_DIR}/* $(INSTALL_DIR)
 
 clean:
 	rm -f $(COMPILED_SCHEMAS) $(MO_FILES)

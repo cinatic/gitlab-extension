@@ -1,3 +1,4 @@
+const ByteArray = imports.byteArray;
 const { GLib } = imports.gi
 
 let CACHE = {}
@@ -14,7 +15,7 @@ var fallbackIfNaN = value => typeof value === 'undefined' || value === null || i
 
 var decodeBase64JsonOrDefault = (encodedJson, defaultValue) => {
   try {
-    const value = JSON.parse(GLib.base64_decode(encodedJson))
+    const value = JSON.parse(ByteArray.toString(GLib.base64_decode(encodedJson)))
 
     if (!value) {
       return defaultValue

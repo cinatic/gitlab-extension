@@ -21,7 +21,8 @@ var Translations = {
   SETTINGS: {
     ACCOUNT_NAME: _('Name'),
     TOKEN: _('Token'),
-    API_ENDPOINT: _('API Endpoint')
+    API_ENDPOINT: _('API Endpoint'),
+    ONLY_OWNED_PROJECTS: _('Only Owned Projects')
   }
 }
 
@@ -33,7 +34,7 @@ var Translations = {
  * If @domain is not provided, it will be taken from metadata['gettext-domain']
  */
 var initTranslations = domain => {
-  if (ExtensionUtils.versionCheck(['3.32'], Config.PACKAGE_VERSION)) {
+  if (Config.PACKAGE_VERSION.startsWith('3.32')) {
     ExtensionUtils.initTranslations(domain)
   } else {
     const extension = ExtensionUtils.getCurrentExtension()

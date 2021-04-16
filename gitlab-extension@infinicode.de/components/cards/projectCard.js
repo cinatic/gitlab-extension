@@ -14,8 +14,7 @@ var ProjectCard = GObject.registerClass({}, class ProjectCard extends St.Button 
     super._init({
       style_class: 'card message project-card',
       can_focus: true,
-      x_expand: true,
-      hover: true
+      x_expand: true
     })
 
     this.cardItem = projectItem
