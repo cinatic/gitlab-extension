@@ -5,10 +5,10 @@ const Me = ExtensionUtils.getCurrentExtension()
 
 const { decodeBase64JsonOrDefault, isNullOrEmpty, isNullOrUndefined } = Me.imports.helpers.data
 
-const POSITION_IN_PANEL_KEY = 'position-in-panel'
-const GITLAB_TOKEN = 'gitlab-token'
-const GITLAB_ACCOUNTS = 'gitlab-accounts'
-const SELECTED_GITLAB_ACCOUNT_INDEX = 'selected-gitlab-account-index'
+var POSITION_IN_PANEL_KEY = 'position-in-panel'
+var GITLAB_TOKEN = 'gitlab-token'
+var GITLAB_ACCOUNTS = 'gitlab-accounts'
+var SELECTED_GITLAB_ACCOUNT_INDEX = 'selected-gitlab-account-index'
 
 var SETTINGS_SCHEMA_DOMAIN = 'org.gnome.shell.extensions.gitlab'
 
