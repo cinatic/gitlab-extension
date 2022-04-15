@@ -2,11 +2,12 @@
   "description": "GitLab extension utilizes the official GitLab API to provide a comfortable overview about your projects, commits & pipelines.\n",
   "localedir": "/usr/local/share/locale",
   "name": "GitLab Extension",
+  "settings-schema": "org.gnome.shell.extensions.gitlab",
+  "gettext-domain": "gnome-shell-extension-gitlab",
   "shell-version": [
-    "3.32",
-    "3.36",
-    "3.38",
-    "40"
+    "40",
+    "41",
+    "42"
   ],
   "url": "https://github.com/cinatic/gitlab-extension",
   "uuid": "gitlab-extension@infinicode.de",

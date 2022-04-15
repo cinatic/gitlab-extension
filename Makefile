@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 # Copyright (C) 2020 Florijan Hamzic <fh[at]infinicode.de>
-# This file is distributed under the same license as the stocks-extension package.
+# This file is distributed under the same license as the gitlab-extension package.
 
 .PHONY: clean mrproper
 
@@ -17,8 +17,8 @@ PO_DIR := $(SRC_DIR)/po
 LOCALE_DIR := $(SRC_DIR)/locale
 
 JS_FILES := $(wildcard $(SRC_DIR)/*.js)
-UI_FILES := $(wildcard $(SRC_DIR)/*.ui)
 CSS_FILES := $(wildcard $(SRC_DIR)/*.css)
+MEDIA_FILES := $(wildcard $(SRC_DIR)/media)
 ICON_DIR := $(SRC_DIR)/icons
 
 JS_COMPONENTS := $(SRC_DIR)/components $(SRC_DIR)/helpers $(SRC_DIR)/services
@@ -31,8 +31,8 @@ PO_FILES := $(wildcard $(PO_DIR)/*.po)
 MO_FILES := $(PO_FILES:$(PO_DIR)/%.po=$(LOCALE_DIR)/%/LC_MESSAGES/$(UUID).mo)
 MO_DIR := $(PO_FILES:$(PO_DIR)/%.po=$(LOCALE_DIR)/%/LC_MESSAGES)
 
-TOLOCALIZE := $(JS_FILES) $(UI_FILES) $(SRC_DIR)/helpers/translations.js
-FILES :=  $(JS_FILES) $(JS_COMPONENTS) $(COMPILED_SCHEMAS) $(UI_FILES) $(CSS_FILES) $(ICON_DIR) $(SRC_DIR)/metadata.json $(MO_FILES)
+TOLOCALIZE := $(JS_FILES) $(SRC_DIR)/helpers/translations.js
+FILES :=  $(JS_FILES) $(JS_COMPONENTS) $(COMPILED_SCHEMAS) $(MEDIA_FILES) $(CSS_FILES) $(ICON_DIR) $(SRC_DIR)/metadata.json $(MO_FILES)
 
 ifeq ($(strip $(DESTDIR)),)
 	INSTALLBASE := $(HOME)/.local

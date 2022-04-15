@@ -120,7 +120,7 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
         latestPipeline = (pipelinesResponse.json() || [])[0]
       }
 
-      this._list.addItem(new ProjectCard(project, latestPipeline))
+      this._list.addItem(new ProjectCard(project, latestPipeline), true)
     })
   }
 

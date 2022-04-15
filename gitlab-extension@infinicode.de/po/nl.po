@@ -7,208 +7,62 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-gitlab-extension\n"
 "Report-Msgid-Bugs-To: fh@infinicode.de\n"
-"POT-Creation-Date: 2021-04-16 20:25+0200\n"
+"POT-Creation-Date: 2022-04-15 12:04+0200\n"
 "PO-Revision-Date: 2021-07-14 18:23+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
-"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: nl\n"
 
-#: gitlab-extension@infinicode.de/settings_40.ui:5
-#: gitlab-extension@infinicode.de/settings.ui:7
-msgid "Create GitLab Account"
-msgstr "GitLab-account aanmaken"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:20
-#: gitlab-extension@infinicode.de/settings.ui:28
-#: gitlab-extension@infinicode.de/helpers/translations.js:22
-msgid "Name"
-msgstr "Naam"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:32
-#: gitlab-extension@infinicode.de/settings_40.ui:154
-#: gitlab-extension@infinicode.de/settings.ui:46
-#: gitlab-extension@infinicode.de/settings.ui:210
-msgid "gitlab.com"
-msgstr "gitlab.com"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:43
-#: gitlab-extension@infinicode.de/settings.ui:59
-#: gitlab-extension@infinicode.de/helpers/translations.js:23
-msgid "Token"
-msgstr "Toegangssleutel"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:62
-#: gitlab-extension@infinicode.de/settings.ui:86
-#: gitlab-extension@infinicode.de/helpers/translations.js:24
-msgid "API Endpoint"
-msgstr "API-endpoint"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:72
-#: gitlab-extension@infinicode.de/settings_40.ui:73
-#: gitlab-extension@infinicode.de/settings_40.ui:195
-#: gitlab-extension@infinicode.de/settings.ui:98
-#: gitlab-extension@infinicode.de/settings.ui:103
-#: gitlab-extension@infinicode.de/settings.ui:267
-msgid "https://gitlab.com/api/v4"
-msgstr "https://gitlab.com/api/v4"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:88
-#: gitlab-extension@infinicode.de/settings_40.ui:221
-#: gitlab-extension@infinicode.de/settings.ui:118
-#: gitlab-extension@infinicode.de/settings.ui:294
-msgid "Cancel"
-msgstr "Annuleren"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:97
-#: gitlab-extension@infinicode.de/settings_40.ui:233
-#: gitlab-extension@infinicode.de/settings.ui:133
-#: gitlab-extension@infinicode.de/settings.ui:312
-msgid "Save"
-msgstr "Opslaan"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:127
-#: gitlab-extension@infinicode.de/settings.ui:171
-msgid "Edit GitLab Account"
-msgstr "GitLab-account bewerken"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:142
-#: gitlab-extension@infinicode.de/settings.ui:192
-msgid "Edit name"
-msgstr "Naam wijzigen"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:165
-#: gitlab-extension@infinicode.de/settings.ui:223
-msgid "Edit Token"
-msgstr "Toegangssleutel wijzigen"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:185
-#: gitlab-extension@infinicode.de/settings.ui:251
-msgid "Edit API Endpoint"
-msgstr "API-endpoint wijzigen"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:334
-#: gitlab-extension@infinicode.de/settings.ui:455
-msgid "Accounts"
-msgstr "Accounts"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:358
-#: gitlab-extension@infinicode.de/settings.ui:477
-msgid "Position in Panel"
-msgstr "Positie op bovenbalk"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:370
-#: gitlab-extension@infinicode.de/settings.ui:490
-msgid "Left"
-msgstr "Links"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:371
-#: gitlab-extension@infinicode.de/settings.ui:491
-msgid "Center"
-msgstr "Midden"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:372
-#: gitlab-extension@infinicode.de/settings.ui:492
-msgid "Right"
-msgstr "Rechts"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:406
-#: gitlab-extension@infinicode.de/settings.ui:530
-msgid "Layout"
-msgstr "Indeling"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:441
-#: gitlab-extension@infinicode.de/settings.ui:569
-msgid "Version: "
-msgstr "Versie: "
-
-#: gitlab-extension@infinicode.de/settings_40.ui:448
-#: gitlab-extension@infinicode.de/settings.ui:583
-msgid "unknown (self-build ?)"
-msgstr "onbekend (zelf-gecompileerd?)"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:457
-#: gitlab-extension@infinicode.de/settings.ui:603
-msgid ""
-"<span>GitLab will provide you a couple of information about your projects "
-"and pipelines. It utilizes the official <a href=\"https://docs.gitlab.com/ee/"
-"api/\">GitLab API v4</a>. The plan is to have a quick and convenient control "
-"over the latest builds and commits.</span>"
+#: gitlab-extension@infinicode.de/helpers/translations.js:12
+msgid "Gitlab Extension"
 msgstr ""
-"<span>GitLab biedt informatie over projecten en pijplijnen. Hiervoor wordt "
-"gebruikgemaakt van de officiële <a href=\"https://docs.gitlab.com/ee/api/"
-"\">GitLab-api, versie 4</a>. Het idee is om snel en gemakkelijk de nieuwste "
-"versies en commits te beheren.</span>"
 
-#: gitlab-extension@infinicode.de/settings_40.ui:473
-#: gitlab-extension@infinicode.de/settings.ui:626
-msgid "Maintained by"
-msgstr "Beheerd door"
-
-#: gitlab-extension@infinicode.de/settings_40.ui:497
-#: gitlab-extension@infinicode.de/settings.ui:677
+#: gitlab-extension@infinicode.de/helpers/translations.js:13
 msgid ""
-"<span size=\"small\">This program comes with ABSOLUTELY NO WARRANTY.\n"
-"See the <a href=\"https://www.gnu.org/licenses/gpl\">GNU General Public "
-"License, version 3 or later</a> for details.</span>"
+"GitLab will provide you a couple of information about your projects and "
+"pipelines in the Panel."
 msgstr ""
-"<span size=\"small\">Deze toepassing biedt GEEN GARANTIE. Bekijk voor meer "
-"informatie de <a href=\"https://www.gnu.org/licenses/gpl\">GNU General "
-"Public License, versie 3 of hoger</a>.</span>"
 
-#: gitlab-extension@infinicode.de/settings_40.ui:509
-#: gitlab-extension@infinicode.de/settings.ui:698
-msgid "About"
-msgstr "Over"
-
-#: gitlab-extension@infinicode.de/settings.ui:45
-#: gitlab-extension@infinicode.de/settings.ui:74
-#: gitlab-extension@infinicode.de/settings.ui:102
-#: gitlab-extension@infinicode.de/settings.ui:209
-#: gitlab-extension@infinicode.de/settings.ui:238
-#: gitlab-extension@infinicode.de/settings.ui:266
-msgid "Clear entry"
-msgstr "Item wissen"
-
-#: gitlab-extension@infinicode.de/helpers/translations.js:11
+#: gitlab-extension@infinicode.de/helpers/translations.js:16
 msgid "back"
 msgstr "Terug"
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:12
+#: gitlab-extension@infinicode.de/helpers/translations.js:17
 msgid "Commits"
 msgstr "Commits"
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:13
+#: gitlab-extension@infinicode.de/helpers/translations.js:18
 msgid "Filter Results"
 msgstr "Resultaten filteren"
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:14
+#: gitlab-extension@infinicode.de/helpers/translations.js:19
 #, javascript-format
 msgid "Updated %s ago"
 msgstr "Bijgewerkt: %s geleden"
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:15
+#: gitlab-extension@infinicode.de/helpers/translations.js:20
 msgid "Loading Data"
 msgstr "Bezig met laden van gegevens…"
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:16
+#: gitlab-extension@infinicode.de/helpers/translations.js:21
 msgid "Error loading data"
 msgstr "De gegevens kunnen niet worden geladen"
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:17
+#: gitlab-extension@infinicode.de/helpers/translations.js:22
 #, javascript-format
 msgid "Error Loading %s: %s"
 msgstr "%s kan niet worden geladen: %s"
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:18
+#: gitlab-extension@infinicode.de/helpers/translations.js:23
 msgid "Pipelines"
 msgstr "Pijplijnen"
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:19
+#: gitlab-extension@infinicode.de/helpers/translations.js:24
 msgid ""
 "No accounts configured. Please open settings and add at least one gitlab "
 "account."
@@ -216,6 +70,154 @@ msgstr ""
 "Er zijn nog geen accounts ingesteld. Open de voorkeuren en voeg minimaal één "
 "GitLab-account toe."
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:25
+#: gitlab-extension@infinicode.de/helpers/translations.js:27
+#, javascript-format
+msgid "Config %d"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:28
+msgid "Name"
+msgstr "Naam"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:29
+msgid "Token"
+msgstr "Toegangssleutel"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:30
+msgid "API Endpoint"
+msgstr "API-endpoint"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:31
 msgid "Only Owned Projects"
 msgstr "Alleen eigen projecten"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:32
+#, fuzzy
+msgid "All Projects"
+msgstr "Alleen eigen projecten"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:33
+msgid "Add Gitlab Config"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:35
+msgid "General"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:36
+msgid "Settings"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:37
+msgid "About"
+msgstr "Over"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:38
+msgid "Accounts"
+msgstr "Accounts"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:39
+#, fuzzy
+msgid "Account List"
+msgstr "Accounts"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:41
+msgid "Position in Panel"
+msgstr "Positie op bovenbalk"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:42
+msgid "Left"
+msgstr "Links"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:43
+msgid "Center"
+msgstr "Midden"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:44
+msgid "Right"
+msgstr "Rechts"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:48
+msgid "OS"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:49
+msgid "Extension Version"
+msgstr ""
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:50
+#, fuzzy
+msgid "Git Commit"
+msgstr "Commits"
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:51
+#, fuzzy
+msgid "GNOME Version"
+msgstr "Versie: "
+
+#: gitlab-extension@infinicode.de/helpers/translations.js:52
+msgid "Session Type"
+msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "GitLab will provide you a couple of information about your projects and "
+#~ "pipelines. It utilizes the official &lt;a href=&quot;https://docs.gitlab."
+#~ "com/ee/api/&quot;&gt;GitLab API v4&lt;/a&gt;. The plan is to have a quick "
+#~ "and convenient control over the latest builds and commits."
+#~ msgstr ""
+#~ "<span>GitLab biedt informatie over projecten en pijplijnen. Hiervoor "
+#~ "wordt gebruikgemaakt van de officiële <a href=\"https://docs.gitlab.com/"
+#~ "ee/api/\">GitLab-api, versie 4</a>. Het idee is om snel en gemakkelijk de "
+#~ "nieuwste versies en commits te beheren.</span>"
+
+#~ msgid "Create GitLab Account"
+#~ msgstr "GitLab-account aanmaken"
+
+#~ msgid "gitlab.com"
+#~ msgstr "gitlab.com"
+
+#~ msgid "https://gitlab.com/api/v4"
+#~ msgstr "https://gitlab.com/api/v4"
+
+#~ msgid "Cancel"
+#~ msgstr "Annuleren"
+
+#~ msgid "Save"
+#~ msgstr "Opslaan"
+
+#~ msgid "Edit GitLab Account"
+#~ msgstr "GitLab-account bewerken"
+
+#~ msgid "Edit name"
+#~ msgstr "Naam wijzigen"
+
+#~ msgid "Edit Token"
+#~ msgstr "Toegangssleutel wijzigen"
+
+#~ msgid "Edit API Endpoint"
+#~ msgstr "API-endpoint wijzigen"
+
+#~ msgid "Layout"
+#~ msgstr "Indeling"
+
+#~ msgid "Version: "
+#~ msgstr "Versie: "
+
+#~ msgid "unknown (self-build ?)"
+#~ msgstr "onbekend (zelf-gecompileerd?)"
+
+#~ msgid "Maintained by"
+#~ msgstr "Beheerd door"
+
+#~ msgid ""
+#~ "<span size=\"small\">This program comes with ABSOLUTELY NO WARRANTY.\n"
+#~ "See the <a href=\"https://www.gnu.org/licenses/gpl\">GNU General Public "
+#~ "License, version 3 or later</a> for details.</span>"
+#~ msgstr ""
+#~ "<span size=\"small\">Deze toepassing biedt GEEN GARANTIE. Bekijk voor "
+#~ "meer informatie de <a href=\"https://www.gnu.org/licenses/gpl\">GNU "
+#~ "General Public License, versie 3 of hoger</a>.</span>"
+
+#~ msgid "Clear entry"
+#~ msgstr "Item wissen"

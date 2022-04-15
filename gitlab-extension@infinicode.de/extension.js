@@ -38,9 +38,9 @@ const { Settings } = Me.imports.helpers.settings
 const ComponentsHelper = Me.imports.helpers.components
 
 const MenuPosition = {
-  CENTER: 0,
-  RIGHT: 1,
-  LEFT: 2
+  LEFT: 0,
+  CENTER: 1,
+  RIGHT: 2
 }
 
 var GitLabPanelMenuButton = GObject.registerClass(
@@ -48,7 +48,7 @@ var GitLabPanelMenuButton = GObject.registerClass(
       _init () {
         super._init(0.5)
 
-        this._currentPanelPosition = null
+        this._previousPanelPosition = null
         this._settingsChangedId = null
 
         const panelMenuIcon = new St.Icon({
@@ -79,48 +79,38 @@ var GitLabPanelMenuButton = GObject.registerClass(
         this._sync()
       }
 
-      _sync () {
+      _sync (changedValue, changedKey) {
         this.checkPositionInPanel()
       }
 
       checkPositionInPanel () {
-        const newPosition = Settings.position_in_panel
+        const container = this.container
+        const parent = container.get_parent()
 
-        if (this._currentPanelPosition === newPosition) {
+        if (!parent || this._previousPanelPosition === Settings.position_in_panel) {
           return
         }
 
-        this.get_parent().remove_actor(this.actor)
-
-        switch (this._currentPanelPosition) {
-          case MenuPosition.LEFT:
-            Main.panel._leftBox.remove_actor(this.actor)
-            break
-          case MenuPosition.CENTER:
-            Main.panel._centerBox.remove_actor(this.actor)
-            break
-          case MenuPosition.RIGHT:
-            Main.panel._rightBox.remove_actor(this.actor)
-            break
-        }
+        parent.remove_actor(container)
 
         let children = null
-        switch (newPosition) {
+
+        switch (Settings.position_in_panel) {
           case MenuPosition.LEFT:
             children = Main.panel._leftBox.get_children()
-            Main.panel._leftBox.insert_child_at_index(this.actor, children.length)
+            Main.panel._leftBox.insert_child_at_index(container, children.length)
             break
           case MenuPosition.CENTER:
             children = Main.panel._centerBox.get_children()
-            Main.panel._centerBox.insert_child_at_index(this.actor, children.length)
+            Main.panel._centerBox.insert_child_at_index(container, children.length)
             break
           case MenuPosition.RIGHT:
             children = Main.panel._rightBox.get_children()
-            Main.panel._rightBox.insert_child_at_index(this.actor, 0)
+            Main.panel._rightBox.insert_child_at_index(container, 0)
             break
         }
 
-        this._currentPanelPosition = newPosition
+        this._previousPanelPosition = Settings.position_in_panel
       }
 
       _destroyExtension () {
@@ -140,6 +130,7 @@ function init (extensionMeta) {
 function enable () {
   gitlabPanelMenuButton = new GitLabPanelMenuButton()
   Main.panel.addToStatusArea('gitlabMenu', gitlabPanelMenuButton)
+  gitlabPanelMenuButton.checkPositionInPanel()
 }
 
 function disable () {
