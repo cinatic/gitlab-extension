@@ -5,7 +5,9 @@ const { Adw, Gio, GObject, Gtk } = imports.gi
 
 const { Translations } = Me.imports.helpers.translations
 
-var NewGitlabAccountRow = GObject.registerClass(
+var NewGitlabAccountRow = GObject.registerClass({
+      GTypeName: 'GitlabExtension-NewGitlabAccountRow',
+    },
     class NewGitlabAccountRowClass extends Adw.PreferencesRow {
 
       constructor () {

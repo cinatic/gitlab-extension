@@ -8,7 +8,9 @@ const _ = Gettext.gettext
 const { Settings, SETTINGS_SCHEMA_DOMAIN } = Me.imports.helpers.settings
 const { initTranslations, Translations } = Me.imports.helpers.translations
 
-var GitlabAccountRow = GObject.registerClass(class GitlabAccountRowClass extends Adw.PreferencesRow {
+var GitlabAccountRow = GObject.registerClass({
+  GTypeName: 'GitlabExtension-GitlabAccountRow',
+}, class GitlabAccountRowClass extends Adw.PreferencesRow {
   constructor (item, gitlabAccountModelList) {
     super({ name: item.name })
 

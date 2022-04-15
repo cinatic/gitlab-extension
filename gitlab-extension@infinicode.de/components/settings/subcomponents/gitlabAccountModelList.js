@@ -12,7 +12,9 @@ const SETTING_KEYS_TO_REFRESH = [
   GITLAB_ACCOUNTS
 ]
 
-var GitlabAccountModelList = GObject.registerClass(class GitlabAccountModelList extends GObject.Object {
+var GitlabAccountModelList = GObject.registerClass({
+  GTypeName: 'GitlabExtension-GitlabAccountModelList',
+}, class GitlabAccountModelList extends GObject.Object {
   static [GObject.interfaces] = [Gio.ListModel]
 
   #items = []

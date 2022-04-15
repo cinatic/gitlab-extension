@@ -6,6 +6,7 @@ const { GObject } = imports.gi
 const { DEFAULT_GITLAB_DATA } = Me.imports.helpers.settings
 
 var GitlabAccountItem = GObject.registerClass({
+  GTypeName: 'GitlabExtension-GitlabAccountItem',
   Properties: {
     'id': GObject.ParamSpec.string('id', 'id', 'id', GObject.ParamFlags.READWRITE, null),
     'name': GObject.ParamSpec.string('name', 'name', 'name', GObject.ParamFlags.READWRITE, DEFAULT_GITLAB_DATA.name),

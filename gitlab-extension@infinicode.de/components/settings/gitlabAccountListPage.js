@@ -11,7 +11,9 @@ const { NewGitlabAccountRow } = Me.imports.components.settings.subcomponents.new
 const { GitlabAccountModelList } = Me.imports.components.settings.subcomponents.gitlabAccountModelList
 const { GitlabAccountRow } = Me.imports.components.settings.subcomponents.gitlabAccountRow
 
-var GitlabAccountListPage = GObject.registerClass(
+var GitlabAccountListPage = GObject.registerClass({
+      GTypeName: 'GitlabExtension-GitlabAccountListPage',
+    },
     class GitlabAccountListPreferencePage extends Adw.PreferencesPage {
       _init () {
         super._init({
@@ -27,7 +29,7 @@ var GitlabAccountListPage = GObject.registerClass(
 
 class GitlabAccountListPreferenceGroup extends Adw.PreferencesGroup {
   static {
-    GObject.registerClass(this)
+    GObject.registerClass({ GTypeName: 'GitlabExtension-GitlabAccountListPreferenceGroup' }, this)
 
     this.install_action('account.add', null, self => self._gitlabAccountModelList.append())
     this.install_action('account.remove', 's', (self, name, param) => self._gitlabAccountModelList.remove(param.unpack()))
