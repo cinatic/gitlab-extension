@@ -38,9 +38,9 @@ const { Settings } = Me.imports.helpers.settings
 const ComponentsHelper = Me.imports.helpers.components
 
 const MenuPosition = {
-  CENTER: 0,
-  RIGHT: 1,
-  LEFT: 2
+  LEFT: 0,
+  CENTER: 1,
+  RIGHT: 2
 }
 
 var GitLabPanelMenuButton = GObject.registerClass(

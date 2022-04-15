@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gnome-shell-extension-gitlab">
     <enum id="org.gnome.shell.extensions.gitlab.position">
-        <value value="0" nick="center"/>
-        <value value="1" nick="right"/>
-        <value value="2" nick="left"/>
+        <value value="0" nick="left"/>
+        <value value="1" nick="center"/>
+        <value value="2" nick="right"/>
     </enum>
     <schema path="/org/gnome/shell/extensions/gitlab/" id="org.gnome.shell.extensions.gitlab">
         <key name="position-in-panel" enum="org.gnome.shell.extensions.gitlab.position">

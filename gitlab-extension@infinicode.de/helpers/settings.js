@@ -70,6 +70,10 @@ const Handler = class {
     return this._settings.get_enum(POSITION_IN_PANEL_KEY)
   }
 
+  set position_in_panel (value) {
+    return this._settings.set_enum(POSITION_IN_PANEL_KEY, value)
+  }
+
   get selected_gitlab_account () {
     const selectedIndex = this.selected_gitlab_account_index
     const accounts = this.gitlab_accounts
