@@ -50,6 +50,7 @@ var GitLabPanelMenuButton = GObject.registerClass(
         this._previousPanelPosition = null
         this._settingsChangedId = null
 
+        this._mainEventHandler = new EventHandler()
         this._settings = new SettingsHandler()
 
         const panelMenuIcon = new St.Icon({
@@ -70,12 +71,12 @@ var GitLabPanelMenuButton = GObject.registerClass(
         bin._delegate = this
         this.menu.box.add_child(bin)
 
-        this._screenWrapper = new ScreenWrapper()
+        this._screenWrapper = new ScreenWrapper(this._mainEventHandler)
         bin.add_actor(this._screenWrapper)
 
         this._settingsChangedId = this._settings.connect('changed', () => this._sync())
         this.menu.connect('destroy', this._destroyExtension.bind(this))
-        EventHandler.connect('hide-panel', () => this.menu.close())
+        this._mainEventHandler.connect('hide-panel', () => this.menu.close())
 
         this._sync()
       }

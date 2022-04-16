@@ -4,7 +4,6 @@ const ExtensionUtils = imports.misc.extensionUtils
 const Me = ExtensionUtils.getCurrentExtension()
 
 const { clearCache } = Me.imports.helpers.data
-const { EventHandler } = Me.imports.helpers.eventHandler
 const { FlatList } = Me.imports.components.flatList.flatList
 const { ProjectSelectButtons } = Me.imports.components.gitlab.projectSelectButtons
 const { ProjectCard } = Me.imports.components.cards.projectCard
@@ -26,17 +25,18 @@ const SETTINGS_KEYS_TO_REFRESH = [
 ]
 
 var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.BoxLayout {
-  _init () {
+  _init (mainEventHandler) {
     super._init({
       style_class: 'screen projects-screen',
       vertical: true
     })
 
+    this._mainEventHandler = mainEventHandler
     this._settings = new SettingsHandler()
 
     this._settingsChangedId = null
 
-    const searchBar = new SearchBar()
+    const searchBar = new SearchBar({ mainEventHandler: this._mainEventHandler })
     this._list = new FlatList()
 
     this.add_child(searchBar)
@@ -62,7 +62,7 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
       this._projectSelectButtons.visible = this._settings.gitlab_accounts.length > 1
     })
 
-    this._list.connect('clicked-item', (sender, item) => EventHandler.emit('show-screen', {
+    this._list.connect('clicked-item', (sender, item) => this._mainEventHandler.emit('show-screen', {
       screen: 'project-details',
       additionalData: {
         item: item.cardItem
