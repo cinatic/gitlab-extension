@@ -3,7 +3,7 @@ const { GObject, St } = imports.gi
 const ExtensionUtils = imports.misc.extensionUtils
 const Me = ExtensionUtils.getCurrentExtension()
 
-const { Settings } = Me.imports.helpers.settings
+const { SettingsHandler } = Me.imports.helpers.settings
 
 var ProjectSelectButtons = GObject.registerClass({}, class ProjectSelectButtons extends St.BoxLayout {
   _init () {
@@ -11,7 +11,9 @@ var ProjectSelectButtons = GObject.registerClass({}, class ProjectSelectButtons 
       style_class: 'project-select-buttons'
     })
 
-    this._settingsChangedId = Settings.connect('changed', (value, key) => {
+    this._settings = new SettingsHandler()
+
+    this._settingsChangedId = this._settings.connect('changed', (value, key) => {
       if (key === 'gitlab-accounts' || key === 'selected-gitlab-account-index') {
         this._sync()
       }
@@ -29,10 +31,10 @@ var ProjectSelectButtons = GObject.registerClass({}, class ProjectSelectButtons 
   _createButtons () {
     this.destroy_all_children()
 
-    const gitlabAccounts = Settings.gitlab_accounts
+    const gitlabAccounts = this._settings.gitlab_accounts
 
     gitlabAccounts.forEach((gitlabAccount, index) => {
-      const additionalStyleClasses = index === Settings.selected_gitlab_account_index ? 'active' : ''
+      const additionalStyleClasses = index === this._settings.selected_gitlab_account_index ? 'active' : ''
 
       const gitlabAccountButton = new St.Button({
         style_class: `message button ${additionalStyleClasses}`,
@@ -40,7 +42,7 @@ var ProjectSelectButtons = GObject.registerClass({}, class ProjectSelectButtons 
       })
 
       gitlabAccountButton.connect('clicked', () => {
-        Settings.selected_gitlab_account_index = index
+        this._settings.selected_gitlab_account_index = index
       })
 
       this.add_child(gitlabAccountButton)
@@ -49,7 +51,7 @@ var ProjectSelectButtons = GObject.registerClass({}, class ProjectSelectButtons 
 
   _onDestroy () {
     if (this._settingsChangedId) {
-      Settings.disconnect(this._settingsChangedId)
+      this._settings.disconnect(this._settingsChangedId)
     }
   }
 })

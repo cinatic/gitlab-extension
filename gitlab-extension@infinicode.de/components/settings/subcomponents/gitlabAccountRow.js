@@ -5,7 +5,7 @@ const { Adw, Gdk, Gio, GLib, GObject, Gtk, Pango } = imports.gi
 const Gettext = imports.gettext.domain(Me.metadata['gettext-domain'])
 const _ = Gettext.gettext
 
-const { Settings, SETTINGS_SCHEMA_DOMAIN } = Me.imports.helpers.settings
+const { SettingsHandler, SETTINGS_SCHEMA_DOMAIN } = Me.imports.helpers.settings
 const { initTranslations, Translations } = Me.imports.helpers.translations
 
 var GitlabAccountRow = GObject.registerClass({

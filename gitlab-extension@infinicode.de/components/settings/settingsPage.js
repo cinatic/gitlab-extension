@@ -3,7 +3,7 @@ const Me = ExtensionUtils.getCurrentExtension()
 
 const { Adw, Gio, GObject, Gtk } = imports.gi
 
-const { Settings } = Me.imports.helpers.settings
+const { SettingsHandler } = Me.imports.helpers.settings
 const { Translations } = Me.imports.helpers.translations
 
 var SettingsPage = GObject.registerClass({
@@ -32,6 +32,8 @@ class GeneralPreferenceGroup extends Adw.PreferencesGroup {
       title: Translations.SETTINGS.TITLE_GENERAL
     })
 
+    this._settings = new SettingsHandler()
+
     const panelPositions = new Gtk.StringList()
     panelPositions.append(Translations.SETTINGS.POSITION_IN_PANEL_LEFT)
     panelPositions.append(Translations.SETTINGS.POSITION_IN_PANEL_CENTER)
@@ -40,11 +42,11 @@ class GeneralPreferenceGroup extends Adw.PreferencesGroup {
     const panelPositionRow = new Adw.ComboRow({
       title: Translations.SETTINGS.POSITION_IN_PANEL,
       model: panelPositions,
-      selected: Settings.position_in_panel
+      selected: this._settings.position_in_panel
     })
 
     panelPositionRow.connect('notify::selected', (widget) => {
-      Settings.position_in_panel = widget.selected
+      this._settings.position_in_panel = widget.selected
     })
     this.add(panelPositionRow)
   }
