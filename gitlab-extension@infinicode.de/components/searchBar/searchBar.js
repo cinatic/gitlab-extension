@@ -5,7 +5,6 @@ const Util = imports.misc.util
 
 const Me = ExtensionUtils.getCurrentExtension()
 
-const { EventHandler } = Me.imports.helpers.eventHandler
 const { IconButton } = Me.imports.components.buttons.iconButton
 const { Translations } = Me.imports.helpers.translations
 
@@ -17,12 +16,13 @@ var SearchBar = GObject.registerClass({
     'refresh': {}
   }
 }, class SearchBar extends St.BoxLayout {
-  _init ({ back_screen_name } = {}) {
+  _init ({ back_screen_name, mainEventHandler } = {}) {
     super._init({
       style_class: 'search-bar',
       x_expand: true
     })
 
+    this._mainEventHandler = mainEventHandler
     this.back_screen_name = back_screen_name
 
     this._searchAreaBox = this._createSearchArea()
@@ -45,7 +45,7 @@ var SearchBar = GObject.registerClass({
         style_class: 'navigate-back-icon-button',
         icon_name: 'go-previous-symbolic',
         text: Translations.BACK,
-        onClick: () => EventHandler.emit('show-screen', { screen: this.back_screen_name })
+        onClick: () => this._mainEventHandler.emit('show-screen', { screen: this.back_screen_name })
       })
 
       searchInputBox.add_child(backIconButton)
@@ -95,7 +95,7 @@ var SearchBar = GObject.registerClass({
       icon_name: 'emblem-system-symbolic',
       icon_size: 18,
       onClick: () => {
-        EventHandler.emit('hide-panel')
+        this._mainEventHandler.emit('hide-panel')
         Util.spawn(['gnome-shell-extension-prefs', 'gitlab-extension@infinicode.de'])
       }
     })

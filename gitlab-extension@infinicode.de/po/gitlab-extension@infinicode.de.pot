@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-gitlab-extension\n"
 "Report-Msgid-Bugs-To: fh@infinicode.de\n"
-"POT-Creation-Date: 2022-04-15 12:50+0200\n"
+"POT-Creation-Date: 2022-04-16 11:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,137 +17,137 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:12
+#: gitlab-extension@infinicode.de/helpers/translations.js:6
 msgid "Gitlab Extension"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:13
+#: gitlab-extension@infinicode.de/helpers/translations.js:7
 msgid ""
 "GitLab will provide you a couple of information about your projects and "
 "pipelines in the Panel."
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:16
+#: gitlab-extension@infinicode.de/helpers/translations.js:10
 msgid "back"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:17
+#: gitlab-extension@infinicode.de/helpers/translations.js:11
 msgid "Commits"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:18
+#: gitlab-extension@infinicode.de/helpers/translations.js:12
 msgid "Filter Results"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:19
+#: gitlab-extension@infinicode.de/helpers/translations.js:13
 #, javascript-format
 msgid "Updated %s ago"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:20
+#: gitlab-extension@infinicode.de/helpers/translations.js:14
 msgid "Loading Data"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:21
+#: gitlab-extension@infinicode.de/helpers/translations.js:15
 msgid "Error loading data"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:22
+#: gitlab-extension@infinicode.de/helpers/translations.js:16
 #, javascript-format
 msgid "Error Loading %s: %s"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:23
+#: gitlab-extension@infinicode.de/helpers/translations.js:17
 msgid "Pipelines"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:24
+#: gitlab-extension@infinicode.de/helpers/translations.js:18
 msgid ""
 "No accounts configured. Please open settings and add at least one gitlab "
 "account."
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:27
+#: gitlab-extension@infinicode.de/helpers/translations.js:21
 #, javascript-format
 msgid "Config %d"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:28
+#: gitlab-extension@infinicode.de/helpers/translations.js:22
 msgid "Name"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:29
+#: gitlab-extension@infinicode.de/helpers/translations.js:23
 msgid "Token"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:30
+#: gitlab-extension@infinicode.de/helpers/translations.js:24
 msgid "API Endpoint"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:31
+#: gitlab-extension@infinicode.de/helpers/translations.js:25
 msgid "Only Owned Projects"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:32
+#: gitlab-extension@infinicode.de/helpers/translations.js:26
 msgid "All Projects"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:33
+#: gitlab-extension@infinicode.de/helpers/translations.js:27
 msgid "Add Gitlab Config"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:35
+#: gitlab-extension@infinicode.de/helpers/translations.js:29
 msgid "General"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:36
+#: gitlab-extension@infinicode.de/helpers/translations.js:30
 msgid "Settings"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:37
+#: gitlab-extension@infinicode.de/helpers/translations.js:31
 msgid "About"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:38
+#: gitlab-extension@infinicode.de/helpers/translations.js:32
 msgid "Accounts"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:39
+#: gitlab-extension@infinicode.de/helpers/translations.js:33
 msgid "Account List"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:41
+#: gitlab-extension@infinicode.de/helpers/translations.js:35
 msgid "Position in Panel"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:42
+#: gitlab-extension@infinicode.de/helpers/translations.js:36
 msgid "Left"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:43
+#: gitlab-extension@infinicode.de/helpers/translations.js:37
 msgid "Center"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:44
+#: gitlab-extension@infinicode.de/helpers/translations.js:38
 msgid "Right"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:48
+#: gitlab-extension@infinicode.de/helpers/translations.js:42
 msgid "OS"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:49
+#: gitlab-extension@infinicode.de/helpers/translations.js:43
 msgid "Extension Version"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:50
+#: gitlab-extension@infinicode.de/helpers/translations.js:44
 msgid "Git Commit"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:51
+#: gitlab-extension@infinicode.de/helpers/translations.js:45
 msgid "GNOME Version"
 msgstr ""
 
-#: gitlab-extension@infinicode.de/helpers/translations.js:52
+#: gitlab-extension@infinicode.de/helpers/translations.js:46
 msgid "Session Type"
 msgstr ""

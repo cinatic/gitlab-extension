@@ -4,14 +4,13 @@ const ExtensionUtils = imports.misc.extensionUtils
 const Me = ExtensionUtils.getCurrentExtension()
 
 const { clearCache } = Me.imports.helpers.data
-const { EventHandler } = Me.imports.helpers.eventHandler
 const { FlatList } = Me.imports.components.flatList.flatList
 const { ProjectSelectButtons } = Me.imports.components.gitlab.projectSelectButtons
 const { ProjectCard } = Me.imports.components.cards.projectCard
 const { SearchBar } = Me.imports.components.searchBar.searchBar
 
 const {
-  Settings,
+  SettingsHandler,
   GITLAB_ACCOUNTS,
   SELECTED_GITLAB_ACCOUNT_INDEX
 } = Me.imports.helpers.settings
@@ -26,21 +25,24 @@ const SETTINGS_KEYS_TO_REFRESH = [
 ]
 
 var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.BoxLayout {
-  _init () {
+  _init (mainEventHandler) {
     super._init({
       style_class: 'screen projects-screen',
       vertical: true
     })
 
+    this._mainEventHandler = mainEventHandler
+    this._settings = new SettingsHandler()
+
     this._settingsChangedId = null
 
-    const searchBar = new SearchBar()
+    const searchBar = new SearchBar({ mainEventHandler: this._mainEventHandler })
     this._list = new FlatList()
 
     this.add_child(searchBar)
 
     this._projectSelectButtons = new ProjectSelectButtons()
-    this._projectSelectButtons.visible = Settings.gitlab_accounts.length > 1
+    this._projectSelectButtons.visible = this._settings.gitlab_accounts.length > 1
     this.add_child(this._projectSelectButtons)
 
     this.add_child(this._list)
@@ -52,15 +54,15 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
 
     searchBar.connect('text-change', (sender, searchText) => this._filter_results(searchText))
 
-    this._settingsChangedId = Settings.connect('changed', (value, key) => {
+    this._settingsChangedId = this._settings.connect('changed', (value, key) => {
       if (SETTINGS_KEYS_TO_REFRESH.includes(key)) {
         this._loadData()
       }
 
-      this._projectSelectButtons.visible = Settings.gitlab_accounts.length > 1
+      this._projectSelectButtons.visible = this._settings.gitlab_accounts.length > 1
     })
 
-    this._list.connect('clicked-item', (sender, item) => EventHandler.emit('show-screen', {
+    this._list.connect('clicked-item', (sender, item) => this._mainEventHandler.emit('show-screen', {
       screen: 'project-details',
       additionalData: {
         item: item.cardItem
@@ -90,7 +92,7 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
   }
 
   async _loadData () {
-    if (!Settings.selected_gitlab_account) {
+    if (!this._settings.selected_gitlab_account) {
       this._list.show_error_info(Translations.TOKEN_ERROR)
       return
     }
@@ -126,7 +128,7 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
 
   _onDestroy () {
     if (this._settingsChangedId) {
-      Settings.disconnect(this._settingsChangedId)
+      this._settings.disconnect(this._settingsChangedId)
     }
   }
 })

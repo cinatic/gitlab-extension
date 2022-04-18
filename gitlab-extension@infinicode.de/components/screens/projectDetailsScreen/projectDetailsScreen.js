@@ -18,18 +18,20 @@ const TABS = {
 }
 
 var ProjectDetailsScreen = GObject.registerClass({}, class ProjectDetailsScreen extends St.BoxLayout {
-  _init (projectItem) {
+  _init (projectItem, mainEventHandler) {
     super._init({
       style_class: 'screen project-details-screen',
       vertical: true
     })
 
+    this._mainEventHandler = mainEventHandler
     this._selectedTab = TABS.COMMITS
 
     this.projectItem = projectItem
 
     const searchBar = new SearchBar({
-      back_screen_name: 'projects'
+      back_screen_name: 'projects',
+      mainEventHandler: this._mainEventHandler
     })
 
     // Static Details Header // TODO: don't be lazy and create a own component for it -.-

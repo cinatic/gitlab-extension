@@ -5,7 +5,7 @@ const { Gio, GObject } = imports.gi
 
 const { GitlabAccountItem } = Me.imports.components.settings.subcomponents.gitlabAccountItem
 
-const { Settings, GITLAB_ACCOUNTS, DEFAULT_GITLAB_DATA } = Me.imports.helpers.settings
+const { SettingsHandler, GITLAB_ACCOUNTS, DEFAULT_GITLAB_DATA } = Me.imports.helpers.settings
 const { Translations } = Me.imports.helpers.translations
 
 const SETTING_KEYS_TO_REFRESH = [
@@ -23,10 +23,12 @@ var GitlabAccountModelList = GObject.registerClass({
   constructor () {
     super()
 
+    this._settings = new SettingsHandler()
+
     this.#items = this.convert_items()
 
     this.#changedId =
-        Settings.connect('changed', (value, key) => {
+        this._settings.connect('changed', (value, key) => {
           if (!SETTING_KEYS_TO_REFRESH.includes(key)) {
             return
           }
@@ -40,7 +42,7 @@ var GitlabAccountModelList = GObject.registerClass({
   }
 
   convert_items () {
-    return Settings.gitlab_accounts.map(item => {
+    return this._settings.gitlab_accounts.map(item => {
       const gitlabAccountItem = new GitlabAccountItem()
 
       gitlabAccountItem.id = item.id || Gio.dbus_generate_guid()
@@ -129,7 +131,7 @@ var GitlabAccountModelList = GObject.registerClass({
   }
 
   save_items () {
-    Settings.gitlab_accounts = this.#items
+    this._settings.gitlab_accounts = this.#items
   }
 
   vfunc_get_item_type () {

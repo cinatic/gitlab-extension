@@ -31,9 +31,8 @@ const ExtensionUtils = imports.misc.extensionUtils
 const Me = ExtensionUtils.getCurrentExtension()
 
 const { EventHandler } = Me.imports.helpers.eventHandler
-const { initTranslations } = Me.imports.helpers.translations
 const { ScreenWrapper } = Me.imports.components.screenWrapper.screenWrapper
-const { Settings } = Me.imports.helpers.settings
+const { SettingsHandler } = Me.imports.helpers.settings
 
 const ComponentsHelper = Me.imports.helpers.components
 
@@ -50,6 +49,9 @@ var GitLabPanelMenuButton = GObject.registerClass(
 
         this._previousPanelPosition = null
         this._settingsChangedId = null
+
+        this._mainEventHandler = new EventHandler()
+        this._settings = new SettingsHandler()
 
         const panelMenuIcon = new St.Icon({
           gicon: ComponentsHelper.getCustomIconPath('gitlab-symbolic'),
@@ -69,12 +71,12 @@ var GitLabPanelMenuButton = GObject.registerClass(
         bin._delegate = this
         this.menu.box.add_child(bin)
 
-        this._screenWrapper = new ScreenWrapper()
+        this._screenWrapper = new ScreenWrapper(this._mainEventHandler)
         bin.add_actor(this._screenWrapper)
 
-        this._settingsChangedId = Settings.connect('changed', () => this._sync())
+        this._settingsChangedId = this._settings.connect('changed', () => this._sync())
         this.menu.connect('destroy', this._destroyExtension.bind(this))
-        EventHandler.connect('hide-panel', () => this.menu.close())
+        this._mainEventHandler.connect('hide-panel', () => this.menu.close())
 
         this._sync()
       }
@@ -87,7 +89,7 @@ var GitLabPanelMenuButton = GObject.registerClass(
         const container = this.container
         const parent = container.get_parent()
 
-        if (!parent || this._previousPanelPosition === Settings.position_in_panel) {
+        if (!parent || this._previousPanelPosition === this._settings.position_in_panel) {
           return
         }
 
@@ -95,7 +97,7 @@ var GitLabPanelMenuButton = GObject.registerClass(
 
         let children = null
 
-        switch (Settings.position_in_panel) {
+        switch (this._settings.position_in_panel) {
           case MenuPosition.LEFT:
             children = Main.panel._leftBox.get_children()
             Main.panel._leftBox.insert_child_at_index(container, children.length)
@@ -110,12 +112,12 @@ var GitLabPanelMenuButton = GObject.registerClass(
             break
         }
 
-        this._previousPanelPosition = Settings.position_in_panel
+        this._previousPanelPosition = this._settings.position_in_panel
       }
 
       _destroyExtension () {
         if (this._settingsChangedId) {
-          Settings.disconnect(this._settingsChangedId)
+          this._settings.disconnect(this._settingsChangedId)
         }
       }
     }
@@ -124,7 +126,7 @@ var GitLabPanelMenuButton = GObject.registerClass(
 var gitlabPanelMenuButton
 
 function init (extensionMeta) {
-  initTranslations()
+  ExtensionUtils.initTranslations()
 }
 
 function enable () {
@@ -134,5 +136,7 @@ function enable () {
 }
 
 function disable () {
-  gitlabPanelMenuButton.destroy()
+  if (gitlabPanelMenuButton) {
+    gitlabPanelMenuButton.destroy()
+  }
 }
