@@ -126,7 +126,7 @@ var GitLabPanelMenuButton = GObject.registerClass(
 var gitlabPanelMenuButton
 
 function init (extensionMeta) {
-  ExtensionUtils.initTranslations(Me.metadata['gettext-domain'])
+  ExtensionUtils.initTranslations()
 }
 
 function enable () {
