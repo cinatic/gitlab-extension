@@ -139,4 +139,6 @@ function disable () {
   if (gitlabPanelMenuButton) {
     gitlabPanelMenuButton.destroy()
   }
+
+  gitlabPanelMenuButton = null
 }
