@@ -1,7 +1,6 @@
 const { GObject, St } = imports.gi
 
 const ExtensionUtils = imports.misc.extensionUtils
-const Util = imports.misc.util
 
 const Me = ExtensionUtils.getCurrentExtension()
 
@@ -96,7 +95,7 @@ var SearchBar = GObject.registerClass({
       icon_size: 18,
       onClick: () => {
         this._mainEventHandler.emit('hide-panel')
-        Util.spawn(['gnome-shell-extension-prefs', 'gitlab-extension@infinicode.de'])
+        ExtensionUtils.openPrefs();
       }
     })
 
