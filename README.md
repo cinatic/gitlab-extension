@@ -6,8 +6,8 @@ GitLab extension utilizes the official GitLab API to provide a comfortable overv
 commits & pipelines.
 
 <p align="middle">
-<img alt="projects" src="https://github.com/cinatic/gitlab-extension/raw/master/images/projects.png" width="350">
-<img alt="commits" src="https://github.com/cinatic/gitlab-extension/raw/master/images/commits.png" width="350">
+<img alt="projects" src="images/projects.png" width="350">
+<img alt="commits" src="images/commits.png" width="350">
 </p>
 
 ### Setup
