@@ -32,7 +32,7 @@ MO_FILES := $(PO_FILES:$(PO_DIR)/%.po=$(LOCALE_DIR)/%/LC_MESSAGES/$(UUID).mo)
 MO_DIR := $(PO_FILES:$(PO_DIR)/%.po=$(LOCALE_DIR)/%/LC_MESSAGES)
 
 TOLOCALIZE := $(JS_FILES) $(SRC_DIR)/helpers/translations.js
-FILES :=  $(JS_FILES) $(JS_COMPONENTS) $(COMPILED_SCHEMAS) $(MEDIA_FILES) $(CSS_FILES) $(ICON_DIR) $(SRC_DIR)/metadata.json $(MO_FILES)
+FILES :=  $(JS_FILES) $(JS_COMPONENTS) $(SCHEMAS_DIR) $(MEDIA_FILES) $(CSS_FILES) $(ICON_DIR) $(SRC_DIR)/metadata.json $(MO_FILES)
 
 ifeq ($(strip $(DESTDIR)),)
 	INSTALLBASE := $(HOME)/.local

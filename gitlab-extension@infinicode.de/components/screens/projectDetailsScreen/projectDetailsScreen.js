@@ -1,23 +1,22 @@
-const { Clutter, GObject, St } = imports.gi
+import Clutter from 'gi://Clutter'
+import GObject from 'gi://GObject'
+import St from 'gi://St'
 
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+import { CommitCard } from '../../cards/commitCard.js'
+import { FlatList } from '../../flatList/flatList.js'
+import { PipelineCard } from '../../cards/pipelineCard.js'
+import { ProjectCard } from '../../cards/projectCard.js'
+import { SearchBar } from '../../searchBar/searchBar.js'
+import { Translations } from '../../../helpers/translations.js'
 
-const { CommitCard } = Me.imports.components.cards.commitCard
-const { FlatList } = Me.imports.components.flatList.flatList
-const { PipelineCard } = Me.imports.components.cards.pipelineCard
-const { ProjectCard } = Me.imports.components.cards.projectCard
-const { SearchBar } = Me.imports.components.searchBar.searchBar
-const { Translations } = Me.imports.helpers.translations
-
-const GitLabService = Me.imports.services.gitlab
+import * as GitLabService from '../../../services/gitlab.js'
 
 const TABS = {
   COMMITS: 'commits',
   PIPELINES: 'pipelines'
 }
 
-var ProjectDetailsScreen = GObject.registerClass({}, class ProjectDetailsScreen extends St.BoxLayout {
+export const ProjectDetailsScreen = GObject.registerClass({}, class ProjectDetailsScreen extends St.BoxLayout {
   _init (projectItem, mainEventHandler) {
     super._init({
       style_class: 'screen project-details-screen',
@@ -101,7 +100,7 @@ var ProjectDetailsScreen = GObject.registerClass({}, class ProjectDetailsScreen 
   //     vertical: false
   //   })
   //
-  //   this.scroll.add_actor(this.box, { expand: false, x_fill: false, x_align: St.Align.LEFT })
+  //   this.scroll.add_actor(this.box, { expand: false, x_fill: false, x_align: Clutter.ActorAlign.LEFT })
   // }
 
   _extract_filterable_search_text (commit, pipeline) {
@@ -212,9 +211,9 @@ var ProjectDetailsScreen = GObject.registerClass({}, class ProjectDetailsScreen 
 
     // refresh data
     if (this._selectedTab === TABS.COMMITS) {
-      this._loadCommits()
+      this._loadCommits().catch(e => log(e))
     } else if (this._selectedTab === TABS.PIPELINES) {
-      this._loadPipelines()
+      this._loadPipelines().catch(e => log(e))
     }
   }
 })

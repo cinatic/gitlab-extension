@@ -23,9 +23,7 @@ msgid "Gitlab Extension"
 msgstr "GitLab-uitbreiding"
 
 #: gitlab-extension@infinicode.de/helpers/translations.js:7
-msgid ""
-"GitLab will provide you a couple of information about your projects and "
-"pipelines in the Panel."
+msgid "GitLab Data right in your Gnome Shell Panel."
 msgstr ""
 "GitLab toont informatie over uw projecten en pijplijnen op de bovenbalk."
 
