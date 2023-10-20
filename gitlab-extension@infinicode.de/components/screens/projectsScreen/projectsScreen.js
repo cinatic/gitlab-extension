@@ -1,30 +1,28 @@
-const { GObject, St } = imports.gi
+import GObject from 'gi://GObject'
+import St from 'gi://St'
 
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+import { clearCache } from '../../../helpers/data.js'
+import { FlatList } from '../../flatList/flatList.js'
+import { ProjectSelectButtons } from '../../gitlab/projectSelectButtons.js'
+import { ProjectCard } from '../../cards/projectCard.js'
+import { SearchBar } from '../../searchBar/searchBar.js'
 
-const { clearCache } = Me.imports.helpers.data
-const { FlatList } = Me.imports.components.flatList.flatList
-const { ProjectSelectButtons } = Me.imports.components.gitlab.projectSelectButtons
-const { ProjectCard } = Me.imports.components.cards.projectCard
-const { SearchBar } = Me.imports.components.searchBar.searchBar
-
-const {
+import {
   SettingsHandler,
   GITLAB_ACCOUNTS,
   SELECTED_GITLAB_ACCOUNT_INDEX
-} = Me.imports.helpers.settings
+} from '../../../helpers/settings.js'
 
-const { Translations } = Me.imports.helpers.translations
+import { Translations } from '../../../helpers/translations.js'
 
-const GitLabService = Me.imports.services.gitlab
+import * as GitLabService from '../../../services/gitlab.js'
 
 const SETTINGS_KEYS_TO_REFRESH = [
   GITLAB_ACCOUNTS,
   SELECTED_GITLAB_ACCOUNT_INDEX
 ]
 
-var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.BoxLayout {
+export const ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.BoxLayout {
   _init (mainEventHandler) {
     super._init({
       style_class: 'screen projects-screen',
@@ -49,14 +47,14 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
 
     searchBar.connect('refresh', () => {
       clearCache()
-      this._loadData()
+      this._loadData().catch(e => log(e))
     })
 
     searchBar.connect('text-change', (sender, searchText) => this._filter_results(searchText))
 
     this._settingsChangedId = this._settings.connect('changed', (value, key) => {
       if (SETTINGS_KEYS_TO_REFRESH.includes(key)) {
-        this._loadData()
+        this._loadData().catch(e => log(e))
       }
 
       this._projectSelectButtons.visible = this._settings.gitlab_accounts.length > 1
@@ -71,7 +69,7 @@ var ProjectsScreen = GObject.registerClass({}, class ProjectsScreen extends St.B
 
     this.connect('destroy', this._onDestroy.bind(this))
 
-    this._loadData()
+    this._loadData().catch(e => log(e))
   }
 
   _filter_results (searchText) {

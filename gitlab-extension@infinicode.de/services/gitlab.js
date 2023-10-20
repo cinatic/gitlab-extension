@@ -1,15 +1,12 @@
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
-
-const { cacheOrDefault } = Me.imports.helpers.data
-const { fetch } = Me.imports.helpers.fetch
-const { SettingsHandler } = Me.imports.helpers.settings
+import { cacheOrDefault } from '../helpers/data.js'
+import { fetch } from '../helpers/fetch.js'
+import { SettingsHandler } from '../helpers/settings.js'
 
 const headers = token => ({
   'PRIVATE-TOKEN': token
 })
 
-var getOwnedProjects = async ({ per_page }) => {
+export const getOwnedProjects = async ({ per_page }) => {
   const settings = new SettingsHandler()
 
   const { name: accountName, apiEndpoint, token, onlyOwnedProjects } = settings.selected_gitlab_account || {}
@@ -27,7 +24,7 @@ var getOwnedProjects = async ({ per_page }) => {
   })
 }
 
-var getCommits = async ({ projectId, per_page }) => {
+export const getCommits = async ({ projectId, per_page }) => {
   const settings = new SettingsHandler()
 
   const { apiEndpoint, token } = settings.selected_gitlab_account || {}
@@ -41,7 +38,7 @@ var getCommits = async ({ projectId, per_page }) => {
   return fetch({ url, headers: headers(token), queryParameters })
 }
 
-var getPipelines = async ({ projectId, per_page }) => {
+export const getPipelines = async ({ projectId, per_page }) => {
   const settings = new SettingsHandler()
 
   const { apiEndpoint, token } = settings.selected_gitlab_account || {}

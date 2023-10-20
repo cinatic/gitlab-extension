@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-shell-extension-gitlab-extension\n"
 "Report-Msgid-Bugs-To: fh@infinicode.de\n"
-"POT-Creation-Date: 2022-04-16 10:55+0200\n"
+"POT-Creation-Date: 2023-10-20 17:08+0200\n"
 "PO-Revision-Date: 2021-07-14 18:23+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -23,9 +23,7 @@ msgid "Gitlab Extension"
 msgstr ""
 
 #: gitlab-extension@infinicode.de/helpers/translations.js:7
-msgid ""
-"GitLab will provide you a couple of information about your projects and "
-"pipelines in the Panel."
+msgid "GitLab Data right in your Gnome Shell Panel."
 msgstr ""
 
 #: gitlab-extension@infinicode.de/helpers/translations.js:10

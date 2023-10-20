@@ -1,14 +1,14 @@
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+import Adw from 'gi://Adw'
+import Gdk from 'gi://Gdk'
+import GLib from 'gi://GLib'
+import GObject from 'gi://GObject'
+import Gtk from 'gi://Gtk'
+import Pango from 'gi://Pango'
 
-const { Adw, Gdk, Gio, GLib, GObject, Gtk, Pango } = imports.gi
-const Gettext = imports.gettext.domain(Me.metadata['gettext-domain'])
-const _ = Gettext.gettext
+import { SETTINGS_SCHEMA_DOMAIN, SettingsHandler } from '../../../helpers/settings.js'
+import { Translations } from '../../../helpers/translations.js'
 
-const { SettingsHandler, SETTINGS_SCHEMA_DOMAIN } = Me.imports.helpers.settings
-const { initTranslations, Translations } = Me.imports.helpers.translations
-
-var GitlabAccountRow = GObject.registerClass({
+export const GitlabAccountRow = GObject.registerClass({
   GTypeName: 'GitlabExtension-GitlabAccountRow',
 }, class GitlabAccountRowClass extends Adw.PreferencesRow {
   constructor (item, gitlabAccountModelList) {

@@ -1,6 +1,7 @@
-const { Gio, GObject } = imports.gi
+import Gio from 'gi://Gio'
+import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
-
-var getCustomIconPath = iconName => Gio.icon_new_for_string(Me.dir.get_child('icons').get_path() + '/' + iconName + '.svg')
+export const getCustomIconPath = iconName => {
+  const extensionObject = Extension.lookupByURL(import.meta.url)
+  return Gio.icon_new_for_string(extensionObject.dir.get_child('icons').get_path() + '/' + iconName + '.svg')
+}

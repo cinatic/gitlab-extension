@@ -22,19 +22,22 @@
  *
  */
 
-const { GObject, St } = imports.gi
+import GObject from 'gi://GObject'
+import St from 'gi://St'
 
-const Main = imports.ui.main
-const PanelMenu = imports.ui.panelMenu
+import * as Main from 'resource:///org/gnome/shell/ui/main.js'
+import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js'
 
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+import { Extension, gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js'
+import { SettingsHandler, setSettingsGetter } from './helpers/settings.js'
+import { initTranslations } from './helpers/translations.js'
 
-const { EventHandler } = Me.imports.helpers.eventHandler
-const { ScreenWrapper } = Me.imports.components.screenWrapper.screenWrapper
-const { SettingsHandler } = Me.imports.helpers.settings
+setSettingsGetter(() => Extension.lookupByURL(import.meta.url).getSettings())
 
-const ComponentsHelper = Me.imports.helpers.components
+import { EventHandler } from './helpers/eventHandler.js'
+import { ScreenWrapper } from './components/screenWrapper/screenWrapper.js'
+
+import * as ComponentsHelper from './helpers/components.js'
 
 const MenuPosition = {
   LEFT: 0,
@@ -42,7 +45,7 @@ const MenuPosition = {
   RIGHT: 2
 }
 
-var GitLabPanelMenuButton = GObject.registerClass(
+export const GitLabPanelMenuButton = GObject.registerClass(
     class GitLabMenuButton extends PanelMenu.Button {
       _init () {
         super._init(0.5)
@@ -123,22 +126,20 @@ var GitLabPanelMenuButton = GObject.registerClass(
     }
 )
 
-var gitlabPanelMenuButton
+let _extensionPanelMenuButton
 
-function init (extensionMeta) {
-  ExtensionUtils.initTranslations()
-}
-
-function enable () {
-  gitlabPanelMenuButton = new GitLabPanelMenuButton()
-  Main.panel.addToStatusArea('gitlabMenu', gitlabPanelMenuButton)
-  gitlabPanelMenuButton.checkPositionInPanel()
-}
-
-function disable () {
-  if (gitlabPanelMenuButton) {
-    gitlabPanelMenuButton.destroy()
+export default class GitlabExtension extends Extension {
+  enable () {
+    initTranslations(_)
+    _extensionPanelMenuButton = new GitLabPanelMenuButton()
+    Main.panel.addToStatusArea('gitlabMenu', _extensionPanelMenuButton)
+    _extensionPanelMenuButton.checkPositionInPanel()
   }
 
-  gitlabPanelMenuButton = null
+  disable () {
+    if(_extensionPanelMenuButton) {
+      _extensionPanelMenuButton.destroy()
+    }
+    _extensionPanelMenuButton = null
+  }
 }

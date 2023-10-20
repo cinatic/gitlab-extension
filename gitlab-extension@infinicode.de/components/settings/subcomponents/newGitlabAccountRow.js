@@ -1,11 +1,10 @@
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+import Adw from 'gi://Adw'
+import GObject from 'gi://GObject'
+import Gtk from 'gi://Gtk'
 
-const { Adw, Gio, GObject, Gtk } = imports.gi
+import { Translations } from '../../../helpers/translations.js'
 
-const { Translations } = Me.imports.helpers.translations
-
-var NewGitlabAccountRow = GObject.registerClass({
+export const NewGitlabAccountRow = GObject.registerClass({
       GTypeName: 'GitlabExtension-NewGitlabAccountRow',
     },
     class NewGitlabAccountRowClass extends Adw.PreferencesRow {
