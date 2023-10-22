@@ -33,10 +33,8 @@ import { ScreenWrapper } from './components/screenWrapper/screenWrapper.js'
 
 import * as ComponentsHelper from './helpers/components.js'
 import { EventHandler } from './helpers/eventHandler.js'
-import { setSettingsGetter, SettingsHandler } from './helpers/settings.js'
+import { initSettings, SettingsHandler } from './helpers/settings.js'
 import { initTranslations } from './helpers/translations.js'
-
-setSettingsGetter(() => Extension.lookupByURL(import.meta.url).getSettings())
 
 const MenuPosition = {
   LEFT: 0,
@@ -129,6 +127,7 @@ let _extensionPanelMenuButton
 
 export default class GitlabExtension extends Extension {
   enable () {
+    initSettings(this)
     initTranslations(_)
     _extensionPanelMenuButton = new GitLabPanelMenuButton()
     Main.panel.addToStatusArea('gitlabMenu', _extensionPanelMenuButton)

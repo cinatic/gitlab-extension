@@ -4,9 +4,7 @@ import Gtk from 'gi://Gtk'
 import { ExtensionPreferences, gettext as _ } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js'
 
 import { initTranslations } from './helpers/translations.js'
-import { setSettingsGetter } from './helpers/settings.js'
-
-setSettingsGetter(() => ExtensionPreferences.lookupByURL(import.meta.url).getSettings())
+import { initSettings } from './helpers/settings.js'
 
 import { AboutPage } from './components/settings/aboutPage.js'
 import { GitlabAccountListPage } from './components/settings/gitlabAccountListPage.js'
@@ -15,6 +13,7 @@ import { SettingsPage } from './components/settings/settingsPage.js'
 
 export default class GitlabExtensionPreferences extends ExtensionPreferences {
   fillPreferencesWindow (window) {
+    initSettings(this)
     initTranslations(_)
 
     let iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())

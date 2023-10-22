@@ -2,9 +2,11 @@ import GLib from 'gi://GLib'
 
 import { decodeBase64JsonOrDefault, isNullOrEmpty, isNullOrUndefined } from './data.js'
 
-let _getSettings = () => {}
-export const setSettingsGetter = (settings) => {
-  _getSettings = settings
+let _settings = null
+let _extensionObject = {}
+
+export const initSettings = extensionObject => {
+  _extensionObject = extensionObject
 }
 
 export const POSITION_IN_PANEL_KEY = 'position-in-panel'
@@ -21,10 +23,6 @@ export const DEFAULT_GITLAB_DATA = {
 }
 
 export const SettingsHandler = class SettingsHandler {
-  constructor () {
-    this._settings = _getSettings()
-  }
-
   get position_in_panel () {
     return this._settings.get_enum(POSITION_IN_PANEL_KEY)
   }
@@ -58,6 +56,18 @@ export const SettingsHandler = class SettingsHandler {
 
   set gitlab_accounts (v) {
     this._settings.set_string(GITLAB_ACCOUNTS, GLib.base64_encode(JSON.stringify(v)))
+  }
+
+  get extensionObject () {
+    return _extensionObject
+  }
+
+  get _settings () {
+    if (!_settings) {
+      _settings = this.extensionObject.getSettings()
+    }
+
+    return _settings
   }
 
   connect (identifier, onChange) {
