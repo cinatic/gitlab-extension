@@ -1,15 +1,15 @@
-const { Gio, GObject, St } = imports.gi
+import Clutter from 'gi://Clutter'
+import Gio from 'gi://Gio'
+import GObject from 'gi://GObject'
+import St from 'gi://St'
 
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+import { IconButton } from '../buttons/iconButton.js'
+import { Icon } from '../icon/icon.js'
+import { Translations } from '../../helpers/translations.js'
 
-const { IconButton } = Me.imports.components.buttons.iconButton
-const { Icon } = Me.imports.components.icon.icon
-const { Translations } = Me.imports.helpers.translations
+import * as DataHelper from '../../helpers/data.js'
 
-const DataHelper = Me.imports.helpers.data
-
-var CommitCard = GObject.registerClass({}, class CommitCard extends St.Button {
+export const CommitCard = GObject.registerClass({}, class CommitCard extends St.Button {
   _init (commitItem, pipeline) {
     super._init({
       style_class: 'card message commit-card',
@@ -67,7 +67,7 @@ var CommitCard = GObject.registerClass({}, class CommitCard extends St.Button {
   _createHeaderInfoSection () {
     let headerInfoSection = new St.BoxLayout({
       style_class: 'info-section-box',
-      x_align: St.Align.END
+      x_align: Clutter.ActorAlign.END
     })
 
     const lastModifiedLabel = new St.Label({
@@ -122,7 +122,7 @@ var CommitCard = GObject.registerClass({}, class CommitCard extends St.Button {
   _createLinkIcon () {
     const linkIconBin = new St.Bin({
       style_class: 'link-icon-bin',
-      x_align: St.Align.END,
+      x_align: Clutter.ActorAlign.END,
       child: new IconButton({
         icon_name: 'open-link-symbolic',
         isCustomIcon: true,

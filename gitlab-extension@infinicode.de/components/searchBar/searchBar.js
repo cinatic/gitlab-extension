@@ -1,13 +1,12 @@
-const { GObject, St } = imports.gi
+import Clutter from 'gi://Clutter'
+import GObject from 'gi://GObject'
+import St from 'gi://St'
 
-const ExtensionUtils = imports.misc.extensionUtils
+import { Translations } from '../../helpers/translations.js'
+import { SettingsHandler } from '../../helpers/settings.js'
+import { IconButton } from '../buttons/iconButton.js'
 
-const Me = ExtensionUtils.getCurrentExtension()
-
-const { IconButton } = Me.imports.components.buttons.iconButton
-const { Translations } = Me.imports.helpers.translations
-
-var SearchBar = GObject.registerClass({
+export const SearchBar = GObject.registerClass({
   Signals: {
     'text-change': {
       param_types: [GObject.TYPE_STRING]
@@ -79,7 +78,7 @@ var SearchBar = GObject.registerClass({
   _createButtonBox () {
     const buttonBox = new St.BoxLayout({
       style_class: 'button-box',
-      x_align: St.Align.END
+      x_align: Clutter.ActorAlign.END
     })
 
     const refreshIconButton = new IconButton({
@@ -94,8 +93,9 @@ var SearchBar = GObject.registerClass({
       icon_name: 'emblem-system-symbolic',
       icon_size: 18,
       onClick: () => {
+        const settings = new SettingsHandler()
         this._mainEventHandler.emit('hide-panel')
-        ExtensionUtils.openPrefs();
+        settings.extensionObject.openPreferences();
       }
     })
 

@@ -1,11 +1,9 @@
-const { GObject, St } = imports.gi
+import GObject from 'gi://GObject'
+import St from 'gi://St'
 
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+import { SettingsHandler } from '../../helpers/settings.js'
 
-const { SettingsHandler } = Me.imports.helpers.settings
-
-var ProjectSelectButtons = GObject.registerClass({}, class ProjectSelectButtons extends St.BoxLayout {
+export const ProjectSelectButtons = GObject.registerClass({}, class ProjectSelectButtons extends St.BoxLayout {
   _init () {
     super._init({
       style_class: 'project-select-buttons'

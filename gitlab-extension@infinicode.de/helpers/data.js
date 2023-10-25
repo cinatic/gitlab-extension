@@ -1,5 +1,4 @@
-const ByteArray = imports.byteArray;
-const { GLib } = imports.gi
+import GLib from 'gi://GLib'
 
 let CACHE = {}
 const CACHE_TIME = 10 * 1000
@@ -9,13 +8,14 @@ const _MS_PER_MINUTE = 1000 * 60
 const _MS_PER_HOUR = 1000 * 60 * 60
 const _MS_PER_DAY = 1000 * 60 * 60 * 24
 
-var isNullOrUndefined = value => typeof value === 'undefined' || value === null
-var isNullOrEmpty = value => isNullOrUndefined(value) || value.length === 0
-var fallbackIfNaN = value => typeof value === 'undefined' || value === null || isNaN(value) ? '--' : value
+export const isNullOrUndefined = value => typeof value === 'undefined' || value === null
+export const isNullOrEmpty = value => isNullOrUndefined(value) || value.length === 0
+export const fallbackIfNaN = value => typeof value === 'undefined' || value === null || isNaN(value) ? '--' : value
 
-var decodeBase64JsonOrDefault = (encodedJson, defaultValue) => {
+export const decodeBase64JsonOrDefault = (encodedJson, defaultValue) => {
   try {
-    const value = JSON.parse(ByteArray.toString(GLib.base64_decode(encodedJson)))
+    const utf8decoder = new TextDecoder();
+    const value = JSON.parse(utf8decoder.decode(GLib.base64_decode(encodedJson)))
 
     if (!value) {
       return defaultValue
@@ -28,11 +28,11 @@ var decodeBase64JsonOrDefault = (encodedJson, defaultValue) => {
   }
 }
 
-var clearCache = () => {
+export const clearCache = () => {
   CACHE = {}
 }
 
-var cacheOrDefault = async (cacheKey, evaluator, cacheDuration = CACHE_TIME) => {
+export const cacheOrDefault = async (cacheKey, evaluator, cacheDuration = CACHE_TIME) => {
   const [timestamp, data] = CACHE[cacheKey] || []
 
   if (timestamp && data && timestamp + cacheDuration >= Date.now()) {
@@ -46,7 +46,7 @@ var cacheOrDefault = async (cacheKey, evaluator, cacheDuration = CACHE_TIME) => 
   return freshData
 }
 
-var getPipelineStatusIconName = status => {
+export const getPipelineStatusIconName = status => {
   switch (status) {
     case 'created':
       return 'creating-symbolic'
@@ -81,7 +81,7 @@ var getPipelineStatusIconName = status => {
   }
 }
 
-var getHumanReadableData = (relevantDate, compareToDate) => {
+export const getHumanReadableData = (relevantDate, compareToDate) => {
   if (!compareToDate) {
     compareToDate = new Date()
   }

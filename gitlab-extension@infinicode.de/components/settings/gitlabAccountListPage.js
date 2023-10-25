@@ -1,17 +1,17 @@
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+import Adw from 'gi://Adw'
+import Gio from 'gi://Gio'
+import GObject from 'gi://GObject'
+import Gtk from 'gi://Gtk'
 
-const { Adw, Gio, GObject, Gtk } = imports.gi
 
-const { SettingsHandler } = Me.imports.helpers.settings
-const { Translations } = Me.imports.helpers.translations
+import { Translations } from '../../helpers/translations.js'
 
-const { NewItemModel } = Me.imports.components.settings.subcomponents.newItemModel
-const { NewGitlabAccountRow } = Me.imports.components.settings.subcomponents.newGitlabAccountRow
-const { GitlabAccountModelList } = Me.imports.components.settings.subcomponents.gitlabAccountModelList
-const { GitlabAccountRow } = Me.imports.components.settings.subcomponents.gitlabAccountRow
+import { NewItemModel } from './subcomponents/newItemModel.js'
+import { NewGitlabAccountRow } from './subcomponents/newGitlabAccountRow.js'
+import { GitlabAccountModelList } from './subcomponents/gitlabAccountModelList.js'
+import { GitlabAccountRow } from './subcomponents/gitlabAccountRow.js'
 
-var GitlabAccountListPage = GObject.registerClass({
+export const GitlabAccountListPage = GObject.registerClass({
       GTypeName: 'GitlabExtension-GitlabAccountListPage',
     },
     class GitlabAccountListPreferencePage extends Adw.PreferencesPage {

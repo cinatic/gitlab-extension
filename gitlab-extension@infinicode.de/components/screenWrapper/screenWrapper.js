@@ -1,11 +1,10 @@
-const { GObject, St } = imports.gi
+import GObject from 'gi://GObject'
+import St from 'gi://St'
 
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
-const { ProjectsScreen } = Me.imports.components.screens.projectsScreen.projectsScreen
-const { ProjectDetailsScreen } = Me.imports.components.screens.projectDetailsScreen.projectDetailsScreen
+import { ProjectDetailsScreen } from '../screens/projectDetailsScreen/projectDetailsScreen.js'
+import { ProjectsScreen } from '../screens/projectsScreen/projectsScreen.js'
 
-var ScreenWrapper = GObject.registerClass(
+export const ScreenWrapper = GObject.registerClass(
     class ScreenWrapper extends St.Widget {
       _init (mainEventHandler) {
         super._init({

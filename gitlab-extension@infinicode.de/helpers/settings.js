@@ -1,28 +1,28 @@
-const { GLib, Gio } = imports.gi
+import GLib from 'gi://GLib'
 
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+import { decodeBase64JsonOrDefault, isNullOrEmpty, isNullOrUndefined } from './data.js'
 
-const { decodeBase64JsonOrDefault, isNullOrEmpty, isNullOrUndefined } = Me.imports.helpers.data
+let _settings = null
+let _extensionObject = {}
 
-var POSITION_IN_PANEL_KEY = 'position-in-panel'
-var GITLAB_TOKEN = 'gitlab-token'
-var GITLAB_ACCOUNTS = 'gitlab-accounts'
-var SELECTED_GITLAB_ACCOUNT_INDEX = 'selected-gitlab-account-index'
+export const initSettings = extensionObject => {
+  _extensionObject = extensionObject
+}
 
-var SETTINGS_SCHEMA_DOMAIN = 'org.gnome.shell.extensions.gitlab'
+export const POSITION_IN_PANEL_KEY = 'position-in-panel'
+export const GITLAB_TOKEN = 'gitlab-token'
+export const GITLAB_ACCOUNTS = 'gitlab-accounts'
+export const SELECTED_GITLAB_ACCOUNT_INDEX = 'selected-gitlab-account-index'
 
-var DEFAULT_GITLAB_DATA = {
+export const SETTINGS_SCHEMA_DOMAIN = 'org.gnome.shell.extensions.gitlab'
+
+export const DEFAULT_GITLAB_DATA = {
   name: 'gitlab.com',
   apiEndpoint: 'https://gitlab.com/api/v4',
   onlyOwnedProjects: false
 }
 
-var SettingsHandler = class SettingsHandler {
-  constructor () {
-    this._settings = ExtensionUtils.getSettings()
-  }
-
+export const SettingsHandler = class SettingsHandler {
   get position_in_panel () {
     return this._settings.get_enum(POSITION_IN_PANEL_KEY)
   }
@@ -56,6 +56,18 @@ var SettingsHandler = class SettingsHandler {
 
   set gitlab_accounts (v) {
     this._settings.set_string(GITLAB_ACCOUNTS, GLib.base64_encode(JSON.stringify(v)))
+  }
+
+  get extensionObject () {
+    return _extensionObject
+  }
+
+  get _settings () {
+    if (!_settings) {
+      _settings = this.extensionObject.getSettings()
+    }
+
+    return _settings
   }
 
   connect (identifier, onChange) {

@@ -1,11 +1,8 @@
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+import GObject from 'gi://GObject'
 
-const { GObject } = imports.gi
+import { DEFAULT_GITLAB_DATA } from '../../../helpers/settings.js'
 
-const { DEFAULT_GITLAB_DATA } = Me.imports.helpers.settings
-
-var GitlabAccountItem = GObject.registerClass({
+export const GitlabAccountItem = GObject.registerClass({
   GTypeName: 'GitlabExtension-GitlabAccountItem',
   Properties: {
     'id': GObject.ParamSpec.string('id', 'id', 'id', GObject.ParamFlags.READWRITE, null),

@@ -1,18 +1,16 @@
-const ExtensionUtils = imports.misc.extensionUtils
-const Me = ExtensionUtils.getCurrentExtension()
+import Gio from 'gi://Gio'
+import GObject from 'gi://GObject'
 
-const { Gio, GObject } = imports.gi
+import { GitlabAccountItem } from '../../../components/settings/subcomponents/gitlabAccountItem.js'
 
-const { GitlabAccountItem } = Me.imports.components.settings.subcomponents.gitlabAccountItem
-
-const { SettingsHandler, GITLAB_ACCOUNTS, DEFAULT_GITLAB_DATA } = Me.imports.helpers.settings
-const { Translations } = Me.imports.helpers.translations
+import { DEFAULT_GITLAB_DATA, GITLAB_ACCOUNTS, SettingsHandler } from '../../../helpers/settings.js'
+import { Translations } from '../../../helpers/translations.js'
 
 const SETTING_KEYS_TO_REFRESH = [
   GITLAB_ACCOUNTS
 ]
 
-var GitlabAccountModelList = GObject.registerClass({
+export const GitlabAccountModelList = GObject.registerClass({
   GTypeName: 'GitlabExtension-GitlabAccountModelList',
 }, class GitlabAccountModelList extends GObject.Object {
   static [GObject.interfaces] = [Gio.ListModel]
