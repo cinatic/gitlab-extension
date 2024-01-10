@@ -19,6 +19,10 @@ Either install it:
 Create a ***Profile access token*** in your profile settings https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html 
 and use it to create a new account entry in gitlab extension settings `Account Grid`.
 
+#### Required Permissions
+
+`read_api` is the only permission required
+
 
 ## Data Source
 The data is fetched from the official GitLab API https://docs.gitlab.com/ee/api/. 
