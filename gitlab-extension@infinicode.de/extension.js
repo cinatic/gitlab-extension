@@ -63,7 +63,7 @@ export const GitLabPanelMenuButton = GObject.registerClass(
           child: panelMenuIcon
         })
 
-        this.add_actor(gitlabPanelIconBin)
+        this.add_child(gitlabPanelIconBin)
         this.add_style_class_name('gitlab-extension')
 
         let bin = new St.Widget({ style_class: 'gitlab-extension' })
@@ -72,7 +72,7 @@ export const GitLabPanelMenuButton = GObject.registerClass(
         this.menu.box.add_child(bin)
 
         this._screenWrapper = new ScreenWrapper(this._mainEventHandler)
-        bin.add_actor(this._screenWrapper)
+        bin.add_child(this._screenWrapper)
 
         this._settingsChangedId = this._settings.connect('changed', () => this._sync())
         this.menu.connect('destroy', this._destroyExtension.bind(this))
@@ -93,7 +93,7 @@ export const GitLabPanelMenuButton = GObject.registerClass(
           return
         }
 
-        parent.remove_actor(container)
+        parent.remove_child(container)
 
         let children = null
 

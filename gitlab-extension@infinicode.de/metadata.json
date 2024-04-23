@@ -5,9 +5,9 @@
   "settings-schema": "org.gnome.shell.extensions.gitlab",
   "gettext-domain": "gnome-shell-extension-gitlab",
   "shell-version": [
-    "45"
+    "46"
   ],
   "url": "https://github.com/cinatic/gitlab-extension",
   "uuid": "gitlab-extension@infinicode.de",
-  "version": 11
+  "version": 9999
 }

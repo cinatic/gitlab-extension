@@ -54,6 +54,7 @@ export const PipelineCard = GObject.registerClass({}, class PipelineCard extends
     const pipelineInfoBin = new St.Bin({
       style_class: 'commit-info-bin',
       x_expand: true,
+      x_align: Clutter.ActorAlign.START,
       child: new St.Label({
         style_class: 'commit-info-label',
         text: `${this.cardItem.ref} - ${this.cardItem.commit.short_id || this.cardItem.sha.substring(0, 8)}`
@@ -109,6 +110,7 @@ export const PipelineCard = GObject.registerClass({}, class PipelineCard extends
     const commitTitleBin = new St.Bin({
       style_class: 'commit-title-bin',
       x_expand: true,
+      x_align: Clutter.ActorAlign.START,
       child: new St.Label({
         style_class: 'commit-title-label',
         text: this.cardItem.commit.title || this.cardItem.sha

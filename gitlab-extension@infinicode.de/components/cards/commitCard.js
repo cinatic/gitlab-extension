@@ -55,6 +55,7 @@ export const CommitCard = GObject.registerClass({}, class CommitCard extends St.
     const commitInfoBin = new St.Bin({
       style_class: 'commit-info-bin',
       x_expand: true,
+      x_align: Clutter.ActorAlign.START,
       child: new St.Label({
         style_class: 'commit-info-label',
         text: `${this.cardItem.author_name} - ${this.cardItem.short_id}`
@@ -110,6 +111,7 @@ export const CommitCard = GObject.registerClass({}, class CommitCard extends St.
     const commitTitleBin = new St.Bin({
       style_class: 'commit-title-bin',
       x_expand: true,
+      x_align: Clutter.ActorAlign.START,
       child: new St.Label({
         style_class: 'commit-title-label',
         text: this.cardItem.title
