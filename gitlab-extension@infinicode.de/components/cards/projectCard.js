@@ -54,6 +54,7 @@ export const ProjectCard = GObject.registerClass({}, class ProjectCard extends S
     const projectPathBin = new St.Bin({
       style_class: 'project-path-bin',
       x_expand: true,
+      x_align: Clutter.ActorAlign.START,
       child: new St.Label({ style_class: 'project-path-label', text: this.cardItem.path_with_namespace.replace(/\//g, ' / ') })
     })
 
@@ -108,6 +109,7 @@ export const ProjectCard = GObject.registerClass({}, class ProjectCard extends S
     const projectNameBin = new St.Bin({
       style_class: 'project-name-bin',
       x_expand: true,
+      x_align: Clutter.ActorAlign.START,
       child: new St.Label({ style_class: 'project-name-label', text: this.cardItem.name })
     })
 

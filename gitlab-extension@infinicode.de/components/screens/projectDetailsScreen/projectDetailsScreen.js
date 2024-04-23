@@ -100,7 +100,7 @@ export const ProjectDetailsScreen = GObject.registerClass({}, class ProjectDetai
   //     vertical: false
   //   })
   //
-  //   this.scroll.add_actor(this.box, { expand: false, x_fill: false, x_align: Clutter.ActorAlign.LEFT })
+  //   this.scroll.add_child(this.box, { expand: false, x_fill: false, x_align: Clutter.ActorAlign.LEFT })
   // }
 
   _extract_filterable_search_text (commit, pipeline) {
